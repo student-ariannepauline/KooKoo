@@ -1,0 +1,4 @@
+include ':student'
+include ':verification'
+include ':app'
+rootProject.name = "KooKoo"
