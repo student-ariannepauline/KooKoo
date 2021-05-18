@@ -2,4 +2,5 @@
     <string name="app_name">KooKoo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hi_there">Ayoko na</string>
 </resources>
