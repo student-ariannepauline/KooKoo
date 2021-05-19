@@ -1,4 +1,4 @@
-package com.sunnyside.kookoo.ui
+package com.sunnyside.kookoo.verification.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -17,11 +17,11 @@ class WelcomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_welcome, container, false)
 
-        view.BtnLogin.setOnClickListener{
-            findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment2)
+        view.welcome_login_btn.setOnClickListener{
+            findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
         }
 
-        view.BtnSignup.setOnClickListener{
+        view.welcome_signup_btn.setOnClickListener{
             findNavController().navigate(R.id.action_welcomeFragment_to_signupFragment)
         }
 

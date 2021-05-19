@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.WelcomeFragment"
+    tools:context=".verification.ui.fragments.WelcomeFragment"
     android:background="@drawable/background">
 
     <TextView
@@ -38,7 +38,7 @@
         app:layout_constraintVertical_bias="0.521" />
 
     <Button
-        android:id="@+id/BtnSignup"
+        android:id="@+id/welcome_signup_btn"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -58,7 +58,7 @@
         app:layout_constraintVertical_bias="0.693" />
 
     <Button
-        android:id="@+id/BtnLogin"
+        android:id="@+id/welcome_login_btn"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:background="@drawable/button_login"

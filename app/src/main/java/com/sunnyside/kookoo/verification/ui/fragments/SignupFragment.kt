@@ -1,4 +1,4 @@
-package com.sunnyside.kookoo.ui
+package com.sunnyside.kookoo.verification.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
