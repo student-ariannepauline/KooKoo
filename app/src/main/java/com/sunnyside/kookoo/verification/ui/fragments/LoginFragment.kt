@@ -1,5 +1,6 @@
 package com.sunnyside.kookoo.verification.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sunnyside.kookoo.R
+import com.sunnyside.kookoo.student.ui.StudentActivity
 import com.sunnyside.kookoo.verification.model.LoggedInUser
 import com.sunnyside.kookoo.verification.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -21,7 +23,6 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
 class LoginFragment : Fragment() {
 
     private lateinit var mLoginViewModel: LoginViewModel
-    private var loggedInUser = emptyList<LoggedInUser>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,11 +45,6 @@ class LoginFragment : Fragment() {
             login()
         }
 
-        mLoginViewModel.isLoggedIn.observe(viewLifecycleOwner, Observer {user ->
-            loggedInUser            
-        })
-        
-        Log.d("Test", loggedInUser.size.toString())
 
         return view
     }
@@ -61,7 +57,8 @@ class LoginFragment : Fragment() {
             val loggedInUser = LoggedInUser(0, email, password)
             mLoginViewModel.login(loggedInUser)
 
-            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+            val intent = Intent(activity, StudentActivity::class.java)
+            activity?.startActivity(intent)
         }
     }
 
