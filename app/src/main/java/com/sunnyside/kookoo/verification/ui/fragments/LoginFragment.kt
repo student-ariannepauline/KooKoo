@@ -9,20 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.student.ui.StudentActivity
-import com.sunnyside.kookoo.verification.model.LoggedInUser
-import com.sunnyside.kookoo.verification.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment : Fragment() {
 
-    private lateinit var mLoginViewModel: LoginViewModel
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +29,7 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
-        mLoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        auth = Firebase.auth
 
         view.textLoginRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
@@ -53,13 +51,26 @@ class LoginFragment : Fragment() {
         val email = loginEmail.text.toString()
         val password = loginPassword.text.toString()
 
-        if (inputCheck(email, password)) {
-            val loggedInUser = LoggedInUser(0, email, password)
-            mLoginViewModel.login(loggedInUser)
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("AUTH", "signInWithEmail:success")
+                    val user = auth.currentUser
 
-            val intent = Intent(activity, StudentActivity::class.java)
-            activity?.startActivity(intent)
-        }
+                    val intent = Intent(activity, StudentActivity::class.java)
+                    activity?.startActivity(intent)
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("AUTH",  "signInWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        context, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
     }
 
     private fun inputCheck(email: String, password: String): Boolean {
