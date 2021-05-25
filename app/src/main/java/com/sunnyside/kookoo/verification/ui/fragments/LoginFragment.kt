@@ -39,6 +39,10 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
         }
 
+        view.reset_password_txt.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_resetFragment)
+        }
+
         view.login_btn.setOnClickListener {
             login()
         }
