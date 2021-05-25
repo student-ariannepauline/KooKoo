@@ -9,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
-import kotlinx.android.synthetic.main.fragment_reset.*
-import kotlinx.android.synthetic.main.fragment_reset.view.*
+import kotlinx.android.synthetic.main.fragment_forgotpassword.*
+import kotlinx.android.synthetic.main.fragment_forgotpassword.view.*
 
 
 class ResetFragment : Fragment() {
@@ -19,21 +19,29 @@ class ResetFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_reset, container, false)
+        val view = inflater.inflate(R.layout.fragment_forgotpassword, container, false)
 
-        view.reset_btn.setOnClickListener {
-            resetPassword()
+        view.forgotPassword_btn.setOnClickListener {
+            forgotPassword()
+        }
+
+        view.create_account_txt.setOnClickListener {
+            findNavController().navigate(R.id.action_welcomeFragment_to_signupFragment)
+        }
+
+        view.login_back2.setOnClickListener {
+            findNavController().navigate(R.id.action_forgotFragment_to_loginFragment)
         }
 
         return view
     }
 
-    fun resetPassword() {
-        val emailAddress = reset_email_txt.text.toString()
+    fun forgotPassword() {
+        val emailAddress = forgotPassword_txt.text.toString()
 
         Firebase.auth.sendPasswordResetEmail(emailAddress).addOnCompleteListener {task ->
             if (task.isSuccessful) {
-                findNavController().navigate(R.id.action_resetFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_forgotFragment_to_loginFragment)
             }
         }
     }
