@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "104702529424",
+    "project_id": "kookoo-881ac",
+    "storage_bucket": "kookoo-881ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104702529424:android:1670a1c7e50870a1bb2d15",
+        "android_client_info": {
+          "package_name": "com.sunnyside.kookoo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104702529424-cd39gesev7e83hglae0fod34ubi6q2s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCUccpkaiP2uV574sHsl83jaaMRgb9Mj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104702529424-cd39gesev7e83hglae0fod34ubi6q2s2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
