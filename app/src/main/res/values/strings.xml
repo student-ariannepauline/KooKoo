@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">KooKoo</string>
     <!-- TODO: Remove or change this placeholder text -->
+
+    <string-array name="yearlevel">
+        <item>Elementary</item>
+        <item>Junior High School</item>
+        <item>Senior High School</item>
+        <item>College</item>
+    </string-array>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hi_there">Welcome</string>
     <string name="log_in_description">Log in to your account</string>

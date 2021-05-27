@@ -7,7 +7,7 @@
     tools:context=".verification.ui.fragments.SignupFragment">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/signupBtnBack"
         android:layout_width="44dp"
         android:layout_height="22dp"
         android:src="@drawable/buttonback"
@@ -201,7 +201,7 @@
         app:layout_constraintVertical_bias="0.943" />
 
     <TextView
-        android:id="@+id/textSignupLogin"
+        android:id="@+id/textBtnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/metropolis_regular"

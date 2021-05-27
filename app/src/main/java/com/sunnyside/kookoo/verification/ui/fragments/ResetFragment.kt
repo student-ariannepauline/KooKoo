@@ -29,7 +29,7 @@ class ResetFragment : Fragment() {
             findNavController().navigate(R.id.action_welcomeFragment_to_signupFragment)
         }
 
-        view.login_back2.setOnClickListener {
+        view.forgotPWbtnBack.setOnClickListener {
             findNavController().navigate(R.id.action_forgotFragment_to_loginFragment)
         }
 
