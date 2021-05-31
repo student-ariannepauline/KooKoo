@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_timeline"
-        android:name="com.sunnyside.student.ui.timeline.TimelineFragment"
+        android:name="com.sunnyside.kookoo.student.ui.timeline.TimelineFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_timeline" />
 
     <fragment
         android:id="@+id/navigation_schedule"
-        android:name="com.sunnyside.student.ui.schedule.ScheduleFragment"
+        android:name="com.sunnyside.kookoo.student.ui.schedule.ScheduleFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_schedule" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.sunnyside.student.ui.profile.ProfileFragment"
+        android:name="com.sunnyside.kookoo.student.ui.profile.ProfileFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_profile" />
 </navigation>

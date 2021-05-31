@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dirtyWhite">
+    android:background="@color/dirtyWhite"
+    tools:context=".student.ui.fragments.SetupProfileFragment">
 
     <TextView
         android:id="@+id/textView15"
@@ -214,8 +215,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/metropolis_regular"
-            android:text="Year Level"
-            android:inputType="none"/>
+            android:inputType="none"
+            android:text="Year Level" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

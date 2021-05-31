@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dashboard_navigation"
-    app:startDestination="@id/dashboardFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.sunnyside.kookoo.DashboardFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_nav_dashboard" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.sunnyside.kookoo.HomeFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -28,10 +28,13 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_verificationActivity"
+            app:destination="@id/verificationActivity" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.sunnyside.kookoo.SettingsFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -41,4 +44,9 @@
             android:id="@+id/action_settingsFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
     </fragment>
+    <activity
+        android:id="@+id/verificationActivity"
+        android:name="com.sunnyside.kookoo.verification.ui.activity.VerificationActivity"
+        android:label="activity_verification"
+        tools:layout="@layout/activity_verification" />
 </navigation>

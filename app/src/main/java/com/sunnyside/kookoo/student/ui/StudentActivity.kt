@@ -14,21 +14,5 @@ class StudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student)
-
-        val user = Firebase.auth.currentUser
-
-        user?.let {
-            user_email_txt.text = user.email
-            user_id_txt.text = user.uid
-            user_name_txt.text = user.displayName
-        }
-
-
-        log_out_btn.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            intent = Intent(this, VerificationActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
     }
 }
