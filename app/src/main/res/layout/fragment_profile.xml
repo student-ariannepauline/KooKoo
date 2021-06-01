@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dirtyWhite"
     tools:context=".student.ui.fragments.ViewProfileFragment">
 
     <LinearLayout
@@ -13,8 +14,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:padding="20dp">
+            android:layout_height="250dp">
 
             <ImageView
                 android:id="@+id/imgProfilePfp"
@@ -62,7 +62,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="EMAIL"
                 android:textColorHint="@color/black"
-                app:hintEnabled="true">
+                app:hintEnabled="true"
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -81,7 +82,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="CONTACT"
                 android:textColorHint="@color/black"
-                app:hintEnabled="true">
+                app:hintEnabled="true"
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -100,7 +102,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="ADDRESS"
                 android:textColorHint="@color/black"
-                app:hintEnabled="true">
+                app:hintEnabled="true"
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -120,7 +123,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="BIRTH DAY"
                 android:textColorHint="@color/black"
-                app:hintEnabled="true">
+                app:hintEnabled="true"
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -139,15 +143,15 @@
                 android:layout_marginBottom="10dp"
                 android:hint="PASSWORD"
                 android:textColorHint="@color/black"
-                app:hintEnabled="true">
+                app:hintEnabled="true"
+                app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:drawableRight="@drawable/ic_outline_lock"
-                    android:drawablePadding="10dp"
                     android:fontFamily="@font/metropolis_thin"
+                    android:inputType="textPassword"
                     android:text="12345678" />
 
             </com.google.android.material.textfield.TextInputLayout>
