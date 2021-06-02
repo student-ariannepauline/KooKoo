@@ -6,4 +6,5 @@
         <item android:title="Home" android:id="@+id/homeFragment" />
         <item android:title="Settings" android:id="@+id/settingsFragment" />
     </group>
+
 </menu>
