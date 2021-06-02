@@ -49,4 +49,14 @@
         android:name="com.sunnyside.kookoo.verification.ui.activity.VerificationActivity"
         android:label="activity_verification"
         tools:layout="@layout/activity_verification" />
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.sunnyside.kookoo.calendar"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/forecastFragment"
+        android:name="com.sunnyside.kookoo.forecast"
+        android:label="fragment_forecast"
+        tools:layout="@layout/fragment_forecast" />
 </navigation>

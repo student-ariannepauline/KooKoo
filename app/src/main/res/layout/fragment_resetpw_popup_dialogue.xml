@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="50dp">
 
 
     <ImageView
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:srcCompat="@drawable/ic_baseline_check"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="20dp"
         android:layout_centerInParent="true"/>
 
     <TextView
@@ -45,10 +46,10 @@
         android:id="@+id/BtnPopup_Okay"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="125dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="125dp"
+        android:layout_marginRight="80dp"
         android:background="@drawable/button_forgotpassword"
         android:fontFamily="@font/metropolis_regular"
         android:text="Okay"
