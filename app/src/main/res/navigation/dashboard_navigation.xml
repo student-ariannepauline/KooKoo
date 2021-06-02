@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dashboard_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/setupProfileFragment">
 
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.sunnyside.kookoo.student.ui.fragments.DashboardFragment"
-        android:label="fragment_dashboard"
+        android:label="Dashboard"
         tools:layout="@layout/fragment_nav_dashboard" >
         <action
             android:id="@+id/action_dashboardFragment_to_homeFragment"
@@ -16,11 +16,14 @@
         <action
             android:id="@+id/action_dashboardFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_viewProfileFragment"
+            app:destination="@id/viewProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.sunnyside.kookoo.student.ui.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="Timeline"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_dashboardFragment"
@@ -35,7 +38,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.sunnyside.kookoo.student.ui.fragments.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="Settins"
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_settingsFragment_to_homeFragment"
@@ -49,4 +52,18 @@
         android:name="com.sunnyside.kookoo.verification.ui.activity.VerificationActivity"
         android:label="activity_verification"
         tools:layout="@layout/activity_verification" />
+    <fragment
+        android:id="@+id/viewProfileFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.ViewProfileFragment"
+        android:label="View Profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_viewProfileFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setupProfileFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.SetupProfileFragment"
+        android:label="fragment_setupprofile"
+        tools:layout="@layout/fragment_setupprofile" />
 </navigation>

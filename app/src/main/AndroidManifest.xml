@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NavigationController"></activity>
+        <activity android:name=".NavigationController" />
         <activity android:name="com.sunnyside.kookoo.student.ui.StudentActivity" />
         <activity android:name=".verification.ui.activity.VerificationActivity" />
         <activity android:name=".MainActivity">
