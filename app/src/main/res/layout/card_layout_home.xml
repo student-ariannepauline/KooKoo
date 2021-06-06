@@ -1,104 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view_home"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_view_home"
     android:layout_margin="5dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="15dp"
     app:cardElevation="3dp"
-    app:contentPadding="4dp"
-    >
+    app:contentPadding="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout"
-        android:padding="16dp"
-        >
+        android:padding="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/item_imgProfile"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/samplepfp"
-            app:shapeAppearanceOverlay="@style/imgView_Circular"
-            app:strokeWidth="3dp"
-            app:strokeColor="@color/dirtyWhite"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:scaleType="centerCrop"/>
-
-        <TextView
-            android:id="@+id/item_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/item_imgProfile"
-            android:text="Announcement 'to"
-            android:fontFamily="@font/metropolis_bold"
-            android:textColor="@color/black"
-            android:textSize="24sp"/>
+            app:shapeAppearanceOverlay="@style/imgView_Circular"
+            app:strokeColor="@color/dirtyWhite"
+            app:strokeWidth="3dp" />
 
         <TextView
-            android:id="@+id/item_timestamp"
+            android:id="@+id/item_title_Home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/item_title"
+            android:fontFamily="@font/metropolis_bold"
+            android:text="Announcement 'to"
+            android:textColor="@color/black"
+            android:textSize="24sp"
             app:layout_constraintLeft_toRightOf="@+id/item_imgProfile"
-            android:text="Date ito kung kelan pinost"
-            android:fontFamily="@font/metropolis_light"
-            android:textColor="@color/grey"
-            android:textSize="12sp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/item_body"
+            android:id="@+id/item_timestamp_Home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/metropolis_light"
+            android:text="Date ito kung kelan pinost"
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/item_imgProfile"
+            app:layout_constraintTop_toBottomOf="@+id/item_title_Home" />
+
+        <TextView
+            android:id="@+id/item_body_Home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_timestamp"
             android:fontFamily="@font/metropolis_regular"
             android:text="Hoy kayo magpasa nga kayo ng mga gagawin! Ano di ka gagawa? edi dont.Parang baliw to. Hi morris gusto ko lang sabihin sayo na ang cute ko at meron na tayong cardview na pwedeng irecycle nang irecycle"
             android:textAlignment="textStart"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_timestamp_Home" />
+
         <TextView
-            android:id="@+id/item_deadline"
+            android:id="@+id/item_deadline_Home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/item_body"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Dito ilalagay yung deadline pare"
             android:fontFamily="@font/metropolis_semibold"
+            android:text="Dito ilalagay yung deadline pare"
+            android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:textAllCaps="true"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_body_Home" />
 
         <TextView
-            android:id="@+id/item_otherContent"
+            android:id="@+id/item_otherContent_Home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/item_deadline"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Follow me on instagram www.instagram.com/arianneignacio"
             android:fontFamily="@font/metropolis_regular"
+            android:text="Follow me on instagram www.instagram.com/arianneignacio"
             android:textColor="@color/blue"
-            android:textSize="13sp" />
-
-
-
-
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_deadline_Home" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
