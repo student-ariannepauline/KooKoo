@@ -46,4 +46,13 @@
         android:name="com.sunnyside.kookoo.student.ui.fragments.SetupProfileFragment"
         android:label="fragment_setupprofile"
         tools:layout="@layout/fragment_setupprofile" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_verificationActivity"
+            app:destination="@id/verificationActivity" />
+    </fragment>
 </navigation>
