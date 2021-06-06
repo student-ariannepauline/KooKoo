@@ -8,7 +8,7 @@
     tools:context=".student.ui.fragments.SetupProfileFragment">
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/textSetupYourProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="113dp"
@@ -23,33 +23,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/setupPfp"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="156dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_outline_camera"
+        app:layout_constraintTop_toBottomOf="@+id/textSetupYourProfile"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15"
-        app:srcCompat="@drawable/setup_profile" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="68dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/setupPfp"
-        app:layout_constraintEnd_toEndOf="@+id/setupPfp"
-        app:layout_constraintHorizontal_bias="0.375"
-        app:layout_constraintStart_toStartOf="@+id/setupPfp"
-        app:layout_constraintTop_toTopOf="@+id/setupPfp"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_outline_camera" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:shapeAppearanceOverlay="@style/imgView_Circular"
+        app:strokeColor="@color/dirtyWhite"
+        app:strokeWidth="3dp" />
 
     <TextView
         android:id="@+id/textSetupName"

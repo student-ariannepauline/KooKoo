@@ -11,9 +11,6 @@
         android:label="Dashboard"
         tools:layout="@layout/fragment_nav_dashboard" >
         <action
-            android:id="@+id/action_dashboardFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
             android:id="@+id/action_dashboardFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
@@ -21,28 +18,10 @@
             app:destination="@id/viewProfileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.sunnyside.kookoo.student.ui.fragments.HomeFragment"
-        android:label="Timeline"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_verificationActivity"
-            app:destination="@id/verificationActivity" />
-    </fragment>
-    <fragment
         android:id="@+id/settingsFragment"
         android:name="com.sunnyside.kookoo.student.ui.fragments.SettingsFragment"
         android:label="Settins"
         tools:layout="@layout/fragment_settings" >
-        <action
-            android:id="@+id/action_settingsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
@@ -67,14 +46,4 @@
         android:name="com.sunnyside.kookoo.student.ui.fragments.SetupProfileFragment"
         android:label="fragment_setupprofile"
         tools:layout="@layout/fragment_setupprofile" />
-    <fragment
-        android:id="@+id/calendarFragment"
-        android:name="com.sunnyside.kookoo.calendar"
-        android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
-    <fragment
-        android:id="@+id/forecastFragment"
-        android:name="com.sunnyside.kookoo.forecast"
-        android:label="fragment_forecast"
-        tools:layout="@layout/fragment_forecast" />
 </navigation>
