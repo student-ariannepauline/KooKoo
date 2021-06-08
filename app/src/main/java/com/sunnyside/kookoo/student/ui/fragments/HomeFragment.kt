@@ -16,37 +16,13 @@ import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
-    private lateinit var mDashboardViewModel: DashboardViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-
-        val user = Firebase.auth.currentUser
-        mDashboardViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
-
-        if (user != null) {
-            mDashboardViewModel.getProfile(user.uid)
-        }
-
-        mDashboardViewModel.userProfile.observe(viewLifecycleOwner, Observer{ profile ->
-            view.user_email_txt.text = profile.email
-            view.user_id_txt.text = profile.uid
-            view.user_name_txt.text = profile.firstName + " " + profile.lastName
-            view.user_program.text = profile.program
-        })
-
-
-
-        view.log_out_btn.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            findNavController().navigate(R.id.action_homeFragment_to_verificationActivity)
-        }
-
-
+        
         return view
     }
 
