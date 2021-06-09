@@ -16,8 +16,6 @@ import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
-    private lateinit var mDashboardViewModel: DashboardViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
