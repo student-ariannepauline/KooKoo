@@ -1,4 +1,4 @@
-package com.sunnyside.kookoo.student.ui.fragments
+package com.sunnyside.kookoo.student.ui.fragments.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
-import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
 import com.sunnyside.kookoo.student.ui.viewmodel.ProfileViewModel
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 class ViewProfileFragment : Fragment() {

@@ -1,22 +1,18 @@
-package com.sunnyside.kookoo.student.ui.fragments
+package com.sunnyside.kookoo.student.ui.fragments.admin
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.sunnyside.kookoo.R
 
-class SetupProfileFragment : Fragment() {
+class EditForecastFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_setupprofile, container, false)
-
-
-        return view
+        return inflater.inflate(R.layout.fragment_edit_forecast, container, false)
     }
-
 }

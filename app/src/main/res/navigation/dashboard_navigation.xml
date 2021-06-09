@@ -7,9 +7,8 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.sunnyside.kookoo.student.ui.fragments.DashboardFragment"
-        android:label="Dashboard"
-        tools:layout="@layout/fragment_nav_dashboard" >
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.DashboardFragment"
+        android:label="Dashboard">
         <action
             android:id="@+id/action_dashboardFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -19,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.sunnyside.kookoo.student.ui.fragments.SettingsFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.SettingsFragment"
         android:label="Settins"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -33,7 +32,7 @@
         tools:layout="@layout/activity_verification" />
     <fragment
         android:id="@+id/viewProfileFragment"
-        android:name="com.sunnyside.kookoo.student.ui.fragments.ViewProfileFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.ViewProfileFragment"
         android:label="View Profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -43,7 +42,7 @@
 
     <fragment
         android:id="@+id/setupProfileFragment"
-        android:name="com.sunnyside.kookoo.student.ui.fragments.SetupProfileFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.SetupProfileFragment"
         android:label="fragment_setupprofile"
         tools:layout="@layout/fragment_setupprofile" />
     <fragment

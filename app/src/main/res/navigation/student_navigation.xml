@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/student_navigation"
+    app:startDestination="@id/classFragment2">
+
+    <fragment
+        android:id="@+id/dashboardFragment2"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.DashboardFragment"
+        android:label="fragment_nav_dashboard"
+        tools:layout="@layout/fragment_nav_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment2_to_setupProfileFragment3"
+            app:destination="@id/setupProfileFragment3" />
+        <action
+            android:id="@+id/action_dashboardFragment2_to_classAdminFragment"
+            app:destination="@id/classAdminFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment2_to_createClassTestFragment2"
+            app:destination="@id/createClassTestFragment2" />
+        <action
+            android:id="@+id/action_dashboardFragment2_to_joinClassTestFragment2"
+            app:destination="@id/joinClassTestFragment2" />
+        <action
+            android:id="@+id/action_dashboardFragment2_to_classFragment2"
+            app:destination="@id/classFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/setupProfileFragment3"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.SetupProfileFragment"
+        android:label="fragment_setupprofile"
+        tools:layout="@layout/fragment_setupprofile" />
+    <fragment
+        android:id="@+id/classAdminFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.admin.ClassAdminFragment"
+        android:label="fragment_class_admin"
+        tools:layout="@layout/fragment_class_admin" />
+    <fragment
+        android:id="@+id/createClassTestFragment2"
+        android:name="com.sunnyside.kookoo.testKolanglods.ui.CreateClassTestFragment"
+        android:label="fragment_create_class_test"
+        tools:layout="@layout/fragment_create_class_test" />
+    <fragment
+        android:id="@+id/joinClassTestFragment2"
+        android:name="com.sunnyside.kookoo.testKolanglods.ui.JoinClassTestFragment"
+        android:label="fragment_join_class_test"
+        tools:layout="@layout/fragment_join_class_test" />
+    <fragment
+        android:id="@+id/classFragment2"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.timeline.ClassFragment"
+        android:label="fragment_class"
+        tools:layout="@layout/fragment_class" />
+</navigation>

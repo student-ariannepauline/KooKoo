@@ -4,19 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".student.ui.StudentActivity">
+    tools:context=".testKolanglods.ui.PangTestingLangLodsActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/student_nav_host"
+        android:id="@+id/fragmentContainerView6"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:navGraph="@navigation/student_navigation" />
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/pangtest_navigation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sidebar_navigation"
+    app:startDestination="@id/viewProfileFragment2">
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/viewProfileFragment2"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.ViewProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_viewProfileFragment2_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment2"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/dashboardFragment3"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.DashboardFragment"
+        android:label="fragment_nav_dashboard"
+        tools:layout="@layout/fragment_nav_dashboard" />
+    <activity
+        android:id="@+id/verificationActivity3"
+        android:name="com.sunnyside.kookoo.verification.ui.activity.VerificationActivity"
+        android:label="activity_verification"
+        tools:layout="@layout/activity_verification" />
+</navigation>

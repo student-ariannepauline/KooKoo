@@ -1,30 +1,29 @@
-package com.sunnyside.kookoo.student.ui.fragments
+package com.sunnyside.kookoo.testKolanglods.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_join_class_test.view.*
 
-class HomeFragment : Fragment() {
-    private lateinit var mDashboardViewModel: DashboardViewModel
-
+class NavHolderFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_navholder_test, container, false)
+
 
         return view
     }
+
 
 }

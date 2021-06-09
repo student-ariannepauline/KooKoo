@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/class_admin_navigation"
+    app:startDestination="@id/timelineAdminFragment">
+
+    <fragment
+        android:id="@+id/timelineAdminFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.admin.TimelineAdminFragment"
+        android:label="fragment_timeline_admin"
+        tools:layout="@layout/fragment_timeline_admin" />
+    <fragment
+        android:id="@+id/forecastFragment2"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.timeline.ForecastFragment"
+        android:label="fragment_forecast"
+        tools:layout="@layout/fragment_forecast" />
+    <fragment
+        android:id="@+id/calendarFragment2"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.timeline.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+</navigation>

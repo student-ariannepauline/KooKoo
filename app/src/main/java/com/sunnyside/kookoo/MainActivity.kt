@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.student.ui.StudentActivity
+import com.sunnyside.kookoo.testKolanglods.ui.PangTestingLangLodsActivity
 import com.sunnyside.kookoo.verification.ui.activity.VerificationActivity
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +23,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkForLoggedInUser() {
         val currentUser = auth.currentUser
-        if(currentUser != null){
+        if (currentUser != null) {
+            // intent = Intent(this, StudentActivity::class.java)
             intent = Intent(this, StudentActivity::class.java)
+
             startActivity(intent)
         } else {
             intent = Intent(this, VerificationActivity::class.java)
