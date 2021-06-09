@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="350dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="10dp"
         android:fontFamily="@font/metropolis_bold"
         android:text="Hi There!"
         android:textColor="@color/black"
@@ -23,15 +23,15 @@
 
     <TextView
         android:id="@+id/textLetsgetStarted"
-        android:layout_width="201dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/metropolis_regular"
         android:text="Let's get started."
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgWelcChar"
         app:layout_constraintTop_toBottomOf="@+id/textHiThere" />
 
     <ImageView
