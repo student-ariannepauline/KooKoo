@@ -20,8 +20,11 @@
             android:id="@+id/action_testDashboardFragment_to_createClassTestFragment"
             app:destination="@id/createClassTestFragment" />
         <action
-            android:id="@+id/action_testDashboardFragment_to_timelineFragment"
-            app:destination="@id/timelineFragment" />
+            android:id="@+id/action_testDashboardFragment_to_classFragment"
+            app:destination="@id/classFragment" />
+        <action
+            android:id="@+id/action_testDashboardFragment_to_classAdminFragment2"
+            app:destination="@id/classAdminFragment2" />
     </fragment>
     <activity
         android:id="@+id/verificationActivity2"
@@ -47,8 +50,13 @@
             app:destination="@id/testDashboardFragment" />
     </fragment>
     <fragment
-        android:id="@+id/timelineFragment"
-        android:name="com.sunnyside.kookoo.student.ui.fragments.timeline.TimelineFragment"
-        android:label="fragment_nav_timeline"
-        tools:layout="@layout/fragment_nav_timeline" />
+        android:id="@+id/classFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.timeline.ClassFragment"
+        android:label="fragment_class"
+        tools:layout="@layout/fragment_class" />
+    <fragment
+        android:id="@+id/classAdminFragment2"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.admin.ClassAdminFragment"
+        android:label="fragment_class_admin"
+        tools:layout="@layout/fragment_class_admin" />
 </navigation>

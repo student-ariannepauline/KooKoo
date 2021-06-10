@@ -9,19 +9,21 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.sunnyside.kookoo.R
+import com.sunnyside.kookoo.databinding.FragmentProfileBinding
 import com.sunnyside.kookoo.student.ui.viewmodel.ProfileViewModel
-import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 class ViewProfileFragment : Fragment() {
     private lateinit var mProfileViewModel: ProfileViewModel
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         val user = Firebase.auth.currentUser
         mProfileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
@@ -30,16 +32,21 @@ class ViewProfileFragment : Fragment() {
             mProfileViewModel.getProfile(user.uid)
         }
 
-        mProfileViewModel.userProfile.observe(viewLifecycleOwner, Observer{profile ->
-            view.profile_name.text = profile.firstName
-            view.profile_email.setText(profile.email)
-            view.profile_yearLevel.text = profile.level.toString() + " year " +  profile.program
-            view.profile_number.setText(profile.contactNumber)
-            view.profile_address.setText(profile.address)
-            view.profile_birthday.setText(profile.birthDate.toString())
+        mProfileViewModel.userProfileModel.observe(viewLifecycleOwner, Observer{ profile ->
+            binding.profileName.text = profile.firstName
+            binding.profileEmail .setText(profile.email)
+            binding.profileYearLevel.text = profile.level.toString() + " year " +  profile.program
+            binding.profileNumber.setText(profile.contactNumber)
+            binding.profileAddress.setText(profile.address)
+            binding.profileBirthday.setText(profile.birthDate.toString())
         })
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

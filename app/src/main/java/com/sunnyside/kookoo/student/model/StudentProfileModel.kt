@@ -2,7 +2,7 @@ package com.sunnyside.kookoo.student.model
 
 import java.util.*
 
-data class StudentProfile(
+data class StudentProfileModel(
     val uid: String = "",
     val firstName: String = "",
     val lastName: String = "",

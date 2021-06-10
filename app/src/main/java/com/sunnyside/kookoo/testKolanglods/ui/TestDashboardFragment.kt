@@ -9,49 +9,73 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
+import com.sunnyside.kookoo.databinding.FragmentTestDashboardBinding
+import com.sunnyside.kookoo.student.model.JoinedClassModel
+import com.sunnyside.kookoo.student.ui.adapters.JoinedClassListAdapter
 import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
-import kotlinx.android.synthetic.main.fragment_test_dashboard.view.*
 
 
 class TestDashboardFragment : Fragment() {
     lateinit var mDashboardViewModel: DashboardViewModel
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_test_dashboard, container, false)
+    private var _binding: FragmentTestDashboardBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         mDashboardViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
+
         val user = Firebase.auth.currentUser
 
         if (user != null) {
             mDashboardViewModel.getClasses(user.uid)
         }
 
-        mDashboardViewModel.joinedClasses.observe(viewLifecycleOwner, Observer{classes ->
-            Log.d("tite", classes.toString())
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // View Binding
+        _binding = FragmentTestDashboardBinding.inflate(inflater, container, false)
+        val view = binding.root
+        val adapter = JoinedClassListAdapter()
+        val recyclerView = binding.joinedClassesList
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+
+        mDashboardViewModel.joinedClassesModel.observe(viewLifecycleOwner, Observer{ classes ->
+            adapter.setData(classes)
         })
 
 
-
-        view.test_logout.setOnClickListener {
+        binding.testLogout.setOnClickListener {
             Firebase.auth.signOut()
             findNavController().navigate(R.id.action_testDashboardFragment_to_verificationActivity2)
         }
 
-        view.test_joinClass.setOnClickListener {
-            findNavController().navigate(R.id.action_testDashboardFragment_to_timelineFragment)
+        binding.testJoinClass.setOnClickListener {
+            findNavController().navigate(R.id.action_testDashboardFragment_to_joinClassTestFragment)
         }
 
-        view.test_createClass.setOnClickListener {
+        binding.testCreateClass.setOnClickListener {
             findNavController().navigate(R.id.action_testDashboardFragment_to_createClassTestFragment)
         }
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

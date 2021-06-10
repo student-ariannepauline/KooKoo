@@ -10,34 +10,43 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
+import com.sunnyside.kookoo.databinding.FragmentJoinClassTestBinding
+import com.sunnyside.kookoo.databinding.FragmentProfileBinding
 import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
-import kotlinx.android.synthetic.main.fragment_join_class_test.view.*
 
 
 class JoinClassTestFragment : Fragment() {
     lateinit var mDashboardViewModel: DashboardViewModel
+    private var _binding: FragmentJoinClassTestBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_join_class_test, container, false)
+        _binding = FragmentJoinClassTestBinding.inflate(inflater, container, false)
+        val view = binding.root
         mDashboardViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         val user = Firebase.auth.currentUser
 
-        view.testJoinClass_btn.setOnClickListener {
+        binding.testJoinClassBtn.setOnClickListener {
             if (user != null) {
-                mDashboardViewModel.joinClass(view.testJoinClass_text.text.toString(), user.uid)
+                mDashboardViewModel.joinClass(binding.testJoinClassText.text.toString(), user.uid, false)
             }
-            findNavController().navigate(R.id.action_joinClassTestFragment_to_testDashboardFragment)
+            findNavController().navigate(R.id.action_joinClassTestFragment2_to_dashboardFragment2)
         }
 
-        view.testJoinBack_btn.setOnClickListener {
-            findNavController().navigate(R.id.action_joinClassTestFragment_to_testDashboardFragment)
+        binding.testJoinBackBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_joinClassTestFragment2_to_dashboardFragment2)
         }
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

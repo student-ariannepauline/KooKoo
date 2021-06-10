@@ -14,38 +14,43 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
+import com.sunnyside.kookoo.databinding.FragmentLoginBinding
+import com.sunnyside.kookoo.databinding.FragmentProfileBinding
 import com.sunnyside.kookoo.student.ui.StudentActivity
 import com.sunnyside.kookoo.testKolanglods.ui.PangTestingLangLodsActivity
-import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_login.view.*
+
 
 class LoginFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         auth = Firebase.auth
 
 
-        view.textLoginRegister.setOnClickListener {
+        binding.textLoginRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
 
-        view.loginbtnBack.setOnClickListener {
+        binding.loginbtnBack.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
         }
 
-        view.reset_password_txt.setOnClickListener {
+        binding.resetPasswordTxt.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_resetFragment)
         }
 
-        view.login_btn.setOnClickListener {
+        binding.loginBtn.setOnClickListener {
             login()
         }
 
@@ -54,8 +59,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun login() {
-        val email = loginEmail.text.toString()
-        val password = loginPassword.text.toString()
+        val email = binding.loginEmail.text.toString()
+        val password = binding.loginPassword.text.toString()
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -81,6 +86,11 @@ class LoginFragment : Fragment() {
 
     private fun inputCheck(email: String, password: String): Boolean {
         return !(TextUtils.isEmpty(email) && TextUtils.isEmpty(password))
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

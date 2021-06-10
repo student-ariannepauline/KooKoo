@@ -13,30 +13,34 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
-import kotlinx.android.synthetic.main.fragment_signup.*
-import kotlinx.android.synthetic.main.fragment_signup.view.*
+import com.sunnyside.kookoo.databinding.FragmentProfileBinding
+import com.sunnyside.kookoo.databinding.FragmentSignupBinding
 
 class SignupFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
+
+    private var _binding: FragmentSignupBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_signup, container, false)
+        _binding = FragmentSignupBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         auth = Firebase.auth
 
-        view.btnSignup.setOnClickListener {
+        binding.btnSignup.setOnClickListener {
             signup()
         }
         return view
     }
 
     private fun signup() {
-        val email = signupEmail.text.toString()
-        val password = signupPassword.text.toString()
+        val email = binding.signupEmail.text.toString()
+        val password = binding.signupPassword.text.toString()
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -47,7 +51,7 @@ class SignupFragment : Fragment() {
                     val user = Firebase.auth.currentUser
 
                     val profileUpdates = userProfileChangeRequest {
-                        displayName = signupName.text.toString()
+                        displayName = binding.signupName.text.toString()
                     }
 
                     user!!.updateProfile(profileUpdates).addOnCompleteListener{ task ->
@@ -65,5 +69,10 @@ class SignupFragment : Fragment() {
                     ).show()
                 }
             }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

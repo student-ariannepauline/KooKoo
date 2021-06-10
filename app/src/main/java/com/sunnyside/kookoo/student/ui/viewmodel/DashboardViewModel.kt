@@ -7,30 +7,33 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.sunnyside.kookoo.student.model.JoinedClass
+import com.sunnyside.kookoo.student.model.JoinedClassModel
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
 
     private val db = Firebase.firestore
-    val joinedClasses: MutableLiveData<List<JoinedClass>> = MutableLiveData()
+    val joinedClassesModel: MutableLiveData<List<JoinedClassModel>> = MutableLiveData()
 
-
-    fun joinClass(classId: String, uid: String) {
+    fun joinClass(classId: String, uid: String, is_admin: Boolean) {
         db.collection("classes")
             .whereEqualTo("__name__", classId)
             .get()
             .addOnSuccessListener { documents ->
-                val document = documents.first()
-                val joinedClassesRef = db.collection("classes_joined").document(uid)
+                if (documents != null) {
+                    Log.d("tite", documents.toString())
+                    val document = documents.first()
+                    val joinedClassesRef = db.collection("classes_joined").document(uid)
 
-                joinedClassesRef.update(
-                    "classes", FieldValue.arrayUnion(
-                        mapOf(
-                            "class_id" to classId,
-                            "name" to document.data["name"]
+                    joinedClassesRef.update(
+                        "classes", FieldValue.arrayUnion(
+                            mapOf(
+                                "class_id" to classId,
+                                "name" to document.data["name"],
+                                "is_admin" to is_admin
+                            )
                         )
                     )
-                )
+                }
             }
     }
 
@@ -42,7 +45,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
             .add(newClass)
             .addOnSuccessListener { documentReference ->
                 Log.d("tite", "DocumentSnapshot written with ID: ${documentReference.id}")
-                joinClass(documentReference.id, uid)
+                joinClass(documentReference.id, uid, true)
             }
             .addOnFailureListener { e ->
                 Log.w("tite", "Error adding document", e)
@@ -57,19 +60,22 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                 if (documents != null) {
                     val document = documents.first()
                     val classes = document.data["classes"] as List<*>
-                    val joinedClassesResponse: MutableList<JoinedClass> = mutableListOf()
+                    val joinedClassesResponseModel: MutableList<JoinedClassModel> = mutableListOf()
 
                     for (joinedClassMap in classes) {
                         joinedClassMap as Map<*, *>
                         val classId = joinedClassMap["class_id"]
                         val className = joinedClassMap["name"]
-                        val joinedClass = JoinedClass(classId as String, className as String)
+                        val isAdmin = joinedClassMap["is_admin"]
+                        val joinedClass = JoinedClassModel(classId as String, className as String, isAdmin as Boolean)
 
-                        joinedClassesResponse += joinedClass
+                        joinedClassesResponseModel += joinedClass
+
 
                     }
 
-                    joinedClasses.value = joinedClassesResponse
+                    joinedClassesModel.value = joinedClassesResponseModel
+                    Log.d("Tite", joinedClassesModel.value.toString())
 
                 }
             }

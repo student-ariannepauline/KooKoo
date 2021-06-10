@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/dirtyWhite"
     android:orientation="vertical"
-    tools:context=".student.ui.fragments.dashboard.DashboardFragment"
-    >
+    tools:context=".student.ui.fragments.dashboard.DashboardFragment">
 
 
     <ImageView
@@ -79,33 +78,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="123dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="123dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_signup"
         android:fontFamily="@font/metropolis_semibold"
         android:text="Join a Class"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateClass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textLookslike" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnCreateClass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="123dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="123dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/button_login"
+        android:fontFamily="@font/metropolis_semibold"
         android:text="@string/create_a_class"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:fontFamily="@font/metropolis_semibold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/joined_classes_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnJoinClass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnJoinClass" />
+        app:layout_constraintTop_toBottomOf="@+id/textClassrooms" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

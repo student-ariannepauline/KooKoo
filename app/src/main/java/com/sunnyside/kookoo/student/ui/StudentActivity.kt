@@ -13,8 +13,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.verification.ui.activity.VerificationActivity
-import kotlinx.android.synthetic.main.activity_student.*
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class StudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

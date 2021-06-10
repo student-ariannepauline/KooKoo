@@ -11,7 +11,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
-import kotlinx.android.synthetic.main.fragment_join_class_test.view.*
 
 class NavHolderFragment : Fragment() {
     override fun onCreateView(

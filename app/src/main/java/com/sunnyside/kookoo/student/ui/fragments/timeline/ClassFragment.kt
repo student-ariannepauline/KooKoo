@@ -13,26 +13,35 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sunnyside.kookoo.R
-import kotlinx.android.synthetic.main.fragment_class.view.*
-
+import com.sunnyside.kookoo.databinding.FragmentClassBinding
+import com.sunnyside.kookoo.databinding.FragmentProfileBinding
 
 class ClassFragment : Fragment() {
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var navView: BottomNavigationView
+
+    private var _binding: FragmentClassBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_class, container, false)
+        _binding = FragmentClassBinding.inflate(inflater, container, false)
+        val view = binding.root
         
         val navController = findNavController()
-        navView = view.class_bottomNavigationView
+        navView = binding.classBottomNavigationView
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
         navView.setupWithNavController(navController)
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

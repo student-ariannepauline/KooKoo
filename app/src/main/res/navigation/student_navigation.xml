@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/student_navigation"
-    app:startDestination="@id/classFragment2">
+    app:startDestination="@id/dashboardFragment2">
 
     <fragment
         android:id="@+id/dashboardFragment2"
@@ -40,15 +40,28 @@
         android:id="@+id/createClassTestFragment2"
         android:name="com.sunnyside.kookoo.testKolanglods.ui.CreateClassTestFragment"
         android:label="fragment_create_class_test"
-        tools:layout="@layout/fragment_create_class_test" />
+        tools:layout="@layout/fragment_create_class_test" >
+        <action
+            android:id="@+id/action_createClassTestFragment2_to_dashboardFragment2"
+            app:destination="@id/dashboardFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/joinClassTestFragment2"
         android:name="com.sunnyside.kookoo.testKolanglods.ui.JoinClassTestFragment"
         android:label="fragment_join_class_test"
-        tools:layout="@layout/fragment_join_class_test" />
+        tools:layout="@layout/fragment_join_class_test" >
+        <action
+            android:id="@+id/action_joinClassTestFragment2_to_dashboardFragment2"
+            app:destination="@id/dashboardFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/classFragment2"
         android:name="com.sunnyside.kookoo.student.ui.fragments.timeline.ClassFragment"
         android:label="fragment_class"
         tools:layout="@layout/fragment_class" />
+    <fragment
+        android:id="@+id/viewProfileFragment3"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.ViewProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

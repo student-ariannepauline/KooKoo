@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.sunnyside.kookoo.R
-import kotlinx.android.synthetic.main.fragment_nav_timeline.view.*
 
 class TimelineFragment : Fragment() {
     override fun onCreateView(

@@ -10,34 +10,41 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
+import com.sunnyside.kookoo.databinding.FragmentCreateClassTestBinding
+import com.sunnyside.kookoo.databinding.FragmentProfileBinding
 import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
-import kotlinx.android.synthetic.main.fragment_create_class_test.view.*
-import kotlinx.android.synthetic.main.fragment_join_class_test.view.*
-import kotlinx.android.synthetic.main.fragment_join_class_test.view.testJoinBack_btn
 
 class CreateClassTestFragment : Fragment() {
     lateinit var mDashboardViewModel: DashboardViewModel
+    private var _binding: FragmentCreateClassTestBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_create_class_test, container, false)
+        _binding = FragmentCreateClassTestBinding.inflate(inflater, container, false)
+        val view = binding.root
         mDashboardViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         val user = Firebase.auth.currentUser
 
-        view.test_createClass_btn.setOnClickListener {
+        binding.testCreateClassBtn.setOnClickListener {
             if (user != null) {
-                mDashboardViewModel.createClass(view.testCreateClass_text.text.toString(), user.uid)
+                mDashboardViewModel.createClass(binding.testCreateClassText.text.toString(), user.uid)
             }
-            findNavController().navigate(R.id.action_createClassTestFragment_to_testDashboardFragment)
+            findNavController().navigate(R.id.action_createClassTestFragment2_to_dashboardFragment2)
         }
 
-        view.testJoinBack_btn.setOnClickListener {
-            findNavController().navigate(R.id.action_createClassTestFragment_to_testDashboardFragment)
+        binding.testJoinBackBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_createClassTestFragment2_to_dashboardFragment2)
         }
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
