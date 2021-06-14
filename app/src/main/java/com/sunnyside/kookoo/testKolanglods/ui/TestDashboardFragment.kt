@@ -45,7 +45,9 @@ class TestDashboardFragment : Fragment() {
         // View Binding
         _binding = FragmentTestDashboardBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = JoinedClassListAdapter()
+        val adapter = JoinedClassListAdapter(){
+
+        }
         val recyclerView = binding.joinedClassesList
 
         recyclerView.adapter = adapter

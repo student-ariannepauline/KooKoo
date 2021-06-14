@@ -2,10 +2,9 @@ package com.sunnyside.kookoo.student.ui.fragments.timeline
 
 import android.app.ActionBar
 import android.os.Bundle
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -13,31 +12,64 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sunnyside.kookoo.R
+import com.sunnyside.kookoo.databinding.ActivityClassBinding
 import com.sunnyside.kookoo.databinding.FragmentClassBinding
 import com.sunnyside.kookoo.databinding.FragmentProfileBinding
+import com.sunnyside.kookoo.testKolanglods.ui.TimelineTestFragment
 
-class ClassFragment : Fragment() {
-    lateinit var appBarConfiguration: AppBarConfiguration
+class ClassFragment() : Fragment() {
     lateinit var navView: BottomNavigationView
 
-    private var _binding: FragmentClassBinding? = null
+    private var _binding: ActivityClassBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var timelineFragment: TimelineHost
+    private lateinit var forecastFragment: ForecastFragment
+    private lateinit var calendarFragment: CalendarFragment
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        timelineFragment = TimelineHost()
+        forecastFragment = ForecastFragment()
+        calendarFragment = CalendarFragment()
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentClassBinding.inflate(inflater, container, false)
+        _binding = ActivityClassBinding.inflate(inflater, container, false)
         val view = binding.root
-        
-        val navController = findNavController()
-        navView = binding.classBottomNavigationView
-        appBarConfiguration = AppBarConfiguration(navController.graph)
 
-        navView.setupWithNavController(navController)
+        makeCurrentFragment(timelineFragment)
+
+        binding.classBottomNavigationView.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.homeFragment -> makeCurrentFragment(timelineFragment)
+                R.id.forecastFragment -> makeCurrentFragment(forecastFragment)
+                R.id.calendarFragment -> makeCurrentFragment(calendarFragment)
+            }
+            true
+        }
 
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        activity?.actionBar?.title = "Class"
+    }
+
+    private fun makeCurrentFragment(fragment: Fragment) =
+        parentFragmentManager.beginTransaction().apply {
+        replace(R.id.fl_wrapper, fragment)
+        commit()
     }
 
     override fun onDestroyView() {

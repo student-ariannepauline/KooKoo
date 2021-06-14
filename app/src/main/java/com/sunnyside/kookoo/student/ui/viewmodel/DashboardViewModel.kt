@@ -19,20 +19,38 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
             .whereEqualTo("__name__", classId)
             .get()
             .addOnSuccessListener { documents ->
-                if (documents != null) {
+                if (!documents.isEmpty) {
                     Log.d("tite", documents.toString())
                     val document = documents.first()
-                    val joinedClassesRef = db.collection("classes_joined").document(uid)
+                    Log.d("tite", "Nakita ko yung class")
 
-                    joinedClassesRef.update(
-                        "classes", FieldValue.arrayUnion(
-                            mapOf(
-                                "class_id" to classId,
-                                "name" to document.data["name"],
-                                "is_admin" to is_admin
-                            )
-                        )
-                    )
+                    db.collection("classes_joined")
+                        .document(uid)
+                        .get()
+                        .addOnSuccessListener { snapshot ->
+                            if (!snapshot.exists()) {
+                                Log.d("tite", "SHT")
+                                val data = hashMapOf(
+                                    "classes" to arrayListOf(mapOf(
+                                        "class_id" to classId,
+                                        "name" to document.data["name"],
+                                        "is_admin" to is_admin
+                                    ))
+                                )
+                                db.collection("classes_joined").document(uid).set(data)
+                            } else {
+                                Log.d("tite", "Tite")
+                                db.collection("classes_joined").document(uid).update(
+                                    "classes", FieldValue.arrayUnion(
+                                        mapOf(
+                                            "class_id" to classId,
+                                            "name" to document.data["name"],
+                                            "is_admin" to is_admin
+                                        )
+                                    )
+                                )
+                            }
+                        }
                 }
             }
     }
@@ -57,7 +75,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
             .whereEqualTo("__name__", uid)
             .get()
             .addOnSuccessListener { documents ->
-                if (documents != null) {
+                if (!documents.isEmpty) {
                     val document = documents.first()
                     val classes = document.data["classes"] as List<*>
                     val joinedClassesResponseModel: MutableList<JoinedClassModel> = mutableListOf()
@@ -67,7 +85,11 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                         val classId = joinedClassMap["class_id"]
                         val className = joinedClassMap["name"]
                         val isAdmin = joinedClassMap["is_admin"]
-                        val joinedClass = JoinedClassModel(classId as String, className as String, isAdmin as Boolean)
+                        val joinedClass = JoinedClassModel(
+                            classId as String,
+                            className as String,
+                            isAdmin as Boolean
+                        )
 
                         joinedClassesResponseModel += joinedClass
 

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/dashboardFragment2"
         android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.DashboardFragment"
-        android:label="fragment_nav_dashboard"
+        android:label="Dashboard"
         tools:layout="@layout/fragment_nav_dashboard" >
         <action
             android:id="@+id/action_dashboardFragment2_to_setupProfileFragment3"
@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_dashboardFragment2_to_classFragment2"
             app:destination="@id/classFragment2" />
+        <action
+            android:id="@+id/action_dashboardFragment2_to_verificationActivity4"
+            app:destination="@id/verificationActivity4" />
     </fragment>
     <fragment
         android:id="@+id/setupProfileFragment3"
@@ -58,10 +61,25 @@
         android:id="@+id/classFragment2"
         android:name="com.sunnyside.kookoo.student.ui.fragments.timeline.ClassFragment"
         android:label="fragment_class"
-        tools:layout="@layout/fragment_class" />
+        tools:layout="@layout/fragment_class" >
+        <argument
+            android:name="joined_class"
+            app:argType="com.sunnyside.kookoo.student.model.JoinedClassModel" />
+    </fragment>
     <fragment
         android:id="@+id/viewProfileFragment3"
         android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.ViewProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <include app:graph="@navigation/pangtest_navigation" />
+    <fragment
+        android:id="@+id/settingsFragment3"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <activity
+        android:id="@+id/verificationActivity4"
+        android:name="com.sunnyside.kookoo.verification.ui.activity.VerificationActivity"
+        android:label="activity_verification"
+        tools:layout="@layout/activity_verification" />
 </navigation>

@@ -9,7 +9,7 @@ import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.CardLayoutJoinedClassTestBinding
 import com.sunnyside.kookoo.student.model.JoinedClassModel
 
-class JoinedClassListAdapter : RecyclerView.Adapter<JoinedClassListAdapter.MyViewHolder>(){
+class JoinedClassListAdapter(private val listener: (JoinedClassModel) -> Unit) : RecyclerView.Adapter<JoinedClassListAdapter.MyViewHolder>(){
 
     private var joinedClassesList = emptyList<JoinedClassModel>()
 
@@ -28,6 +28,7 @@ class JoinedClassListAdapter : RecyclerView.Adapter<JoinedClassListAdapter.MyVie
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = joinedClassesList[position]
+        holder.itemBinding.root.setOnClickListener { listener(currentItem)}
         holder.bind(currentItem)
     }
 

@@ -3,21 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/timeline_navigation"
-    app:startDestination="@id/homeFragment2">
-
+    app:startDestination="@id/timelineTestFragment2">
     <fragment
-        android:id="@+id/homeFragment2"
-        android:name="com.sunnyside.kookoo.student.ui.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/timelineTestFragment2"
+        android:name="com.sunnyside.kookoo.testKolanglods.ui.TimelineTestFragment"
+        android:label="fragment_timeline_test"
+        tools:layout="@layout/fragment_timeline_test" >
+        <action
+            android:id="@+id/action_timelineTestFragment2_to_addPostFragment2"
+            app:destination="@id/addPostFragment2" />
+    </fragment>
     <fragment
-        android:id="@+id/forecast"
-        android:name="com.sunnyside.kookoo.forecast"
-        android:label="fragment_forecast"
-        tools:layout="@layout/fragment_forecast" />
-    <fragment
-        android:id="@+id/calendar"
-        android:name="com.sunnyside.kookoo.calendar"
-        android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        android:id="@+id/addPostFragment2"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.admin.AddPostFragment"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post" >
+        <argument android:name="class_id"
+            app:argType="string" />
+    </fragment>
 </navigation>

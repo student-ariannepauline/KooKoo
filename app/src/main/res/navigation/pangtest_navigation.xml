@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pangtest_navigation"
-    app:startDestination="@id/testDashboardFragment">
+    app:startDestination="@id/timelineTestFragment">
 
     <fragment
         android:id="@+id/testDashboardFragment"
@@ -59,4 +59,22 @@
         android:name="com.sunnyside.kookoo.student.ui.fragments.admin.ClassAdminFragment"
         android:label="fragment_class_admin"
         tools:layout="@layout/fragment_class_admin" />
+    <fragment
+        android:id="@+id/timelineTestFragment"
+        android:name="com.sunnyside.kookoo.testKolanglods.ui.TimelineTestFragment"
+        android:label="fragment_timeline_test"
+        tools:layout="@layout/fragment_timeline_test" >
+        <action
+            android:id="@+id/action_timelineTestFragment_to_addPostFragment"
+            app:destination="@id/addPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPostFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.admin.AddPostFragment"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post" >
+        <argument
+            android:name="class_id"
+            app:argType="string" />
+    </fragment>
 </navigation>

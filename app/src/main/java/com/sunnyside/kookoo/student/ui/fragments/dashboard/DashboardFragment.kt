@@ -23,7 +23,7 @@ import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
 
 class DashboardFragment : Fragment() {
     lateinit var mDashboardViewModel: DashboardViewModel
-    lateinit var userName : String
+    lateinit var userName: String
 
     private var _binding: FragmentNavDashboardBinding? = null
     private val binding get() = _binding!!
@@ -53,14 +53,17 @@ class DashboardFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentNavDashboardBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = JoinedClassListAdapter()
+        val adapter = JoinedClassListAdapter() { joinedClass ->
+            val action = DashboardFragmentDirections.actionDashboardFragment2ToClassFragment2(joinedClass)
+            findNavController().navigate(action)
+        }
         val recyclerView = binding.joinedClassesList
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.textGreeting.text = "Hi, $userName"
 
-        mDashboardViewModel.joinedClassesModel.observe(viewLifecycleOwner, Observer{ classes ->
+        mDashboardViewModel.joinedClassesModel.observe(viewLifecycleOwner, Observer { classes ->
             if (classes != null) {
                 binding.textLookslike.isVisible = false
                 binding.imgDashCharacter.isVisible = false

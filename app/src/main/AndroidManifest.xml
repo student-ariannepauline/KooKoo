@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".testKolanglods.ui.PangTestingLangLodsActivity"></activity>
+        <activity android:name=".student.ui.ClassActivity"></activity>
+        <activity android:name=".testKolanglods.ui.PangTestingLangLodsActivity" />
         <activity android:name=".NavigationController" />
-        <activity android:name=".student.ui.StudentActivity" />
+        <activity
+            android:name=".student.ui.StudentActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".verification.ui.activity.VerificationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

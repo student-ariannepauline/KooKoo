@@ -72,9 +72,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/joined_classes_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnJoinClass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textClassrooms" />
@@ -94,8 +94,7 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/textLookslike"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateClass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -105,14 +104,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:layout_marginEnd="120dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button_login"
         android:fontFamily="@font/metropolis_semibold"
         android:text="@string/create_a_class"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/btnJoinClass"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

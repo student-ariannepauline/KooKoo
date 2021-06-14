@@ -33,11 +33,12 @@ class CreateClassTestFragment : Fragment() {
             if (user != null) {
                 mDashboardViewModel.createClass(binding.testCreateClassText.text.toString(), user.uid)
             }
-            findNavController().navigate(R.id.action_createClassTestFragment2_to_dashboardFragment2)
+
+            findNavController().popBackStack()
         }
 
         binding.testJoinBackBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_createClassTestFragment2_to_dashboardFragment2)
+            findNavController().popBackStack()
         }
         return view
     }

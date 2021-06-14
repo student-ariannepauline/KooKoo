@@ -32,13 +32,20 @@ class JoinClassTestFragment : Fragment() {
 
         binding.testJoinClassBtn.setOnClickListener {
             if (user != null) {
-                mDashboardViewModel.joinClass(binding.testJoinClassText.text.toString(), user.uid, false)
+                mDashboardViewModel.joinClass(
+                    binding.testJoinClassText.text.toString(),
+                    user.uid,
+                    false
+                )
+
             }
-            findNavController().navigate(R.id.action_joinClassTestFragment2_to_dashboardFragment2)
+
+            findNavController().popBackStack()
+
         }
 
         binding.testJoinBackBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_joinClassTestFragment2_to_dashboardFragment2)
+            findNavController().popBackStack()
         }
 
         return view
