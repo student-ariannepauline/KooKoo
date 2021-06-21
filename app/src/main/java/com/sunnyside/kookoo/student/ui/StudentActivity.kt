@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import android.widget.Toolbar
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -44,6 +45,7 @@ class StudentActivity : AppCompatActivity() {
         binding.myToolbar.setupWithNavController(navController, appBarConfiguration)
 
         setupDrawerContent(binding.navigationView)
+
 
     }
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/forecast_navigation"
+    app:startDestination="@id/forecastAdminFragment2">
+
+    <fragment
+        android:id="@+id/addForecastFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.admin.AddForecastFragment"
+        android:label="fragment_add_forecast"
+        tools:layout="@layout/fragment_add_forecast" />
+    <fragment
+        android:id="@+id/forecastAdminFragment2"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.admin.ForecastAdminFragment"
+        android:label="fragment_forecast_admin"
+        tools:layout="@layout/fragment_forecast_admin" >
+        <action
+            android:id="@+id/action_forecastAdminFragment2_to_addForecastFragment"
+            app:destination="@id/addForecastFragment" />
+    </fragment>
+</navigation>

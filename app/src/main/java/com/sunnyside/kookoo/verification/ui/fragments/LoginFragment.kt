@@ -61,14 +61,12 @@ class LoginFragment : Fragment() {
     private fun login() {
         val email = binding.loginEmail.text.toString()
         val password = binding.loginPassword.text.toString()
-
+        binding.llProgressBar.root.visibility = View.VISIBLE
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("AUTH", "signInWithEmail:success")
-                    val user = auth.currentUser
-
                     val intent = Intent(activity, StudentActivity::class.java)
                     activity?.startActivity(intent)
 

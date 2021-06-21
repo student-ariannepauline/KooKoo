@@ -11,6 +11,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.databinding.FragmentProfileBinding
 import com.sunnyside.kookoo.student.ui.viewmodel.ProfileViewModel
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class ViewProfileFragment : Fragment() {
     private lateinit var mProfileViewModel: ProfileViewModel
@@ -33,12 +36,14 @@ class ViewProfileFragment : Fragment() {
         }
 
         mProfileViewModel.userProfileModel.observe(viewLifecycleOwner, Observer{ profile ->
+            val birthdayFormat : DateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy")
+            val birthday = LocalDateTime.ofInstant(profile.birthDate.toInstant(), ZoneId.systemDefault())
             binding.profileName.text = profile.firstName
             binding.profileEmail .setText(profile.email)
             binding.profileYearLevel.text = profile.level.toString() + " year " +  profile.program
             binding.profileNumber.setText(profile.contactNumber)
             binding.profileAddress.setText(profile.address)
-            binding.profileBirthday.setText(profile.birthDate.toString())
+            binding.profileBirthday.setText(birthday.format(birthdayFormat))
         })
 
         return view

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.student.model.JoinedClassModel
@@ -70,8 +71,43 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
             }
     }
 
-    fun getClasses(uid: String) {
-        db.collection("classes_joined")
+    fun getClasses(uid: String): ListenerRegistration {
+        val docRef = db.collection("classes_joined").whereEqualTo("__name__", uid)
+
+        return docRef.addSnapshotListener { documents, e ->
+            if (e != null) {
+                Log.w("tite", "Listen failed.", e)
+                return@addSnapshotListener
+            }
+
+            if (documents != null && !documents.isEmpty) {
+                val classes = documents.first().data["classes"] as List<*>
+                val joinedClassesResponseModel: MutableList<JoinedClassModel> = mutableListOf()
+
+                for (joinedClassMap in classes) {
+                    joinedClassMap as Map<*, *>
+                    val classId = joinedClassMap["class_id"]
+                    val className = joinedClassMap["name"]
+                    val isAdmin = joinedClassMap["is_admin"]
+                    val joinedClass = JoinedClassModel(
+                        classId as String,
+                        className as String,
+                        isAdmin as Boolean
+                    )
+
+                    joinedClassesResponseModel += joinedClass
+                }
+
+                joinedClassesModel.value = joinedClassesResponseModel
+                Log.d("Tite", joinedClassesModel.value.toString())
+
+            } else {
+                Log.d("tite", "Current data: null")
+            }
+
+        }
+
+/*        db.collection("classes_joined")
             .whereEqualTo("__name__", uid)
             .get()
             .addOnSuccessListener { documents ->
@@ -100,6 +136,6 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                     Log.d("Tite", joinedClassesModel.value.toString())
 
                 }
-            }
+            }*/
     }
 }

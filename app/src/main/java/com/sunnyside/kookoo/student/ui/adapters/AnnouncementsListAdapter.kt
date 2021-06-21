@@ -17,7 +17,7 @@ class AnnouncementsListAdapter : RecyclerView.Adapter<AnnouncementsListAdapter.M
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(announcement: AnnouncementModel) {
             val deadlineFormat : DateTimeFormatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy")
-            val timestampFormat : DateTimeFormatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm")
+            val timestampFormat : DateTimeFormatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy h:mm a")
 
             itemBinding.itemTitleHome.text = announcement.title
             itemBinding.itemBodyHome.text = announcement.body

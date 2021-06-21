@@ -17,8 +17,5 @@
         android:id="@+id/addPostFragment2"
         android:name="com.sunnyside.kookoo.student.ui.fragments.admin.AddPostFragment"
         android:label="fragment_add_post"
-        tools:layout="@layout/fragment_add_post" >
-        <argument android:name="class_id"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_add_post" />
 </navigation>

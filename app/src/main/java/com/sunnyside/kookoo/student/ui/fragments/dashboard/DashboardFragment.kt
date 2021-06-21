@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentDashboardBinding
@@ -24,13 +25,27 @@ import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
 class DashboardFragment : Fragment() {
     lateinit var mDashboardViewModel: DashboardViewModel
     lateinit var userName: String
+    lateinit var registration : ListenerRegistration
 
     private var _binding: FragmentNavDashboardBinding? = null
     private val binding get() = _binding!!
 
+    override fun onStart() {
+        super.onStart()
+        val user = Firebase.auth.currentUser
+
+        if (user != null) {
+            registration = mDashboardViewModel.getClasses(user.uid)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        registration.remove()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         mDashboardViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
 
         val user = Firebase.auth.currentUser
@@ -38,11 +53,6 @@ class DashboardFragment : Fragment() {
         if (user != null) {
             userName = user.displayName.toString()
         }
-
-        if (user != null) {
-            mDashboardViewModel.getClasses(user.uid)
-        }
-
 
     }
 

@@ -165,4 +165,9 @@
         app:layout_constraintStart_toEndOf="@+id/textDontHaveAccount"
         app:layout_constraintTop_toBottomOf="@+id/login_btn" />
 
+    <include
+        android:id="@+id/llProgressBar"
+        android:visibility="gone"
+        layout="@layout/dialog_layout_progress"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

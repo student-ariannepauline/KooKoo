@@ -5,15 +5,88 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.ListenerRegistration
 import com.sunnyside.kookoo.R
+import com.sunnyside.kookoo.databinding.FragmentForecastAdminBinding
+import com.sunnyside.kookoo.databinding.FragmentTimelineTestBinding
+import com.sunnyside.kookoo.student.data.JoinedClass
+import com.sunnyside.kookoo.student.model.ForecastModel
+import com.sunnyside.kookoo.student.ui.adapters.ForecastListAdapter
+import com.sunnyside.kookoo.student.ui.viewmodel.ForecastViewModel
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 
 class ForecastAdminFragment : Fragment() {
+    private lateinit var mForecastViewModel: ForecastViewModel
+    private lateinit var classId: String
+    private lateinit var registration: ListenerRegistration
+
+    private var _binding: FragmentForecastAdminBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mForecastViewModel = ViewModelProvider(this).get(ForecastViewModel::class.java)
+        classId = JoinedClass.joinedClass.class_id
+    }
+
+    override fun onStart() {
+        super.onStart()
+        registration = mForecastViewModel.getForecasts(classId)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        registration.remove()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_forecast_admin, container, false)
+        _binding = FragmentForecastAdminBinding.inflate(inflater, container, false)
+        val view = binding.root
+        val adapter = ForecastListAdapter() {
+
+        }
+
+        val recyclerView = binding.recyclerViewForecast
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+/*
+        val forecasts = listOf(
+            ForecastModel(
+                "Meeting: PE",
+                "asd",
+            "CANCELLED",
+                LocalDate.parse("2021-06-23"),
+                LocalDateTime.now()
+            )
+        )
+
+        adapter.setData(forecasts)*/
+
+        mForecastViewModel.forecasts.observe(viewLifecycleOwner, Observer { forecasts ->
+            adapter.setData(forecasts)
+        })
+
+        binding.btnAddForecast.setOnClickListener {
+            findNavController().navigate(R.id.action_forecastAdminFragment2_to_addForecastFragment)
+        }
+
+
+
+        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

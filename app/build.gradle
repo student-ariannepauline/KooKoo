@@ -48,6 +48,7 @@ dependencies {
     def nav_version = "2.2.2"
     def lifecycle_version = "2.3.1"
     def room_version = "2.3.0"
+    def activity_version = "1.2.3"
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -66,7 +67,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
 
-
+    implementation "androidx.activity:activity-ktx:$activity_version"
     // Navigation Components
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
