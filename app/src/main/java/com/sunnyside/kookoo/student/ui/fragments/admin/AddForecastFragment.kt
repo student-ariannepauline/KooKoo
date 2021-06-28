@@ -80,8 +80,8 @@ class AddForecastFragment : Fragment() {
 
     private fun post() {
         val newForecast = ForecastModel(
-            "Sample",
-            "Sample",
+            binding.edittextTitleForecast.text.toString(),
+            binding.edittextOtherContentForecast.text.toString(),
             "CONFIRMED",
             LocalDateTime.of(meetingDate, meetingTime)
         )

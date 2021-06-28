@@ -21,16 +21,13 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
             .get()
             .addOnSuccessListener { documents ->
                 if (!documents.isEmpty) {
-                    Log.d("tite", documents.toString())
                     val document = documents.first()
-                    Log.d("tite", "Nakita ko yung class")
 
                     db.collection("classes_joined")
                         .document(uid)
                         .get()
                         .addOnSuccessListener { snapshot ->
                             if (!snapshot.exists()) {
-                                Log.d("tite", "SHT")
                                 val data = hashMapOf(
                                     "classes" to arrayListOf(mapOf(
                                         "class_id" to classId,
@@ -40,7 +37,6 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                                 )
                                 db.collection("classes_joined").document(uid).set(data)
                             } else {
-                                Log.d("tite", "Tite")
                                 db.collection("classes_joined").document(uid).update(
                                     "classes", FieldValue.arrayUnion(
                                         mapOf(

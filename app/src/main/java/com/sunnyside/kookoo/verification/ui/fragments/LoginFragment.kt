@@ -82,9 +82,6 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun inputCheck(email: String, password: String): Boolean {
-        return !(TextUtils.isEmpty(email) && TextUtils.isEmpty(password))
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

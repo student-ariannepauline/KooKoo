@@ -22,7 +22,7 @@ class DatePicker(private val listener: (LocalDate) -> Unit) : DialogFragment(), 
     }
 
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-        val selectedDate = LocalDate.parse("${p1}-${(p2 + 1).toString().padStart(2, '0')}-${p3}")
+        val selectedDate = LocalDate.parse("${p1}-${(p2 + 1).toString().padStart(2, '0')}-${p3.toString().padStart(2, '0')}")
         listener(selectedDate)
     }
 }
