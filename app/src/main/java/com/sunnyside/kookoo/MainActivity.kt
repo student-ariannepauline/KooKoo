@@ -44,3 +44,4 @@ fun Fragment.setAppBarTitle(title : String) {
         actionBar.title = title
     }
 }
+

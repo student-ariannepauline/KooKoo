@@ -83,4 +83,9 @@
         android:name="com.sunnyside.kookoo.verification.ui.activity.VerificationActivity"
         android:label="activity_verification"
         tools:layout="@layout/activity_verification" />
+    <fragment
+        android:id="@+id/inviteFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.InviteFragment"
+        android:label="fragment_invite_code"
+        tools:layout="@layout/fragment_invite_code" />
 </navigation>

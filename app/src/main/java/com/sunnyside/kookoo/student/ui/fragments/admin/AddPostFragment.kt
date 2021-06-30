@@ -41,6 +41,7 @@ class AddPostFragment : Fragment() {
         setHasOptionsMenu(true)
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
         inflater.inflate(R.menu.add_post_menu, menu)
     }
 
