@@ -1,28 +1,21 @@
 package com.sunnyside.kookoo.student.ui
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import android.widget.Toolbar
-import androidx.fragment.app.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.ActivityStudentBinding
-import com.sunnyside.kookoo.verification.ui.activity.VerificationActivity
 
 private lateinit var binding: ActivityStudentBinding
 private lateinit var navController: NavController
-
+private lateinit var appBarConfiguration: AppBarConfiguration
 
 class StudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +27,7 @@ class StudentActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.student_nav_host) as NavHostFragment
         navController = navHostFragment.navController
-        val appBarConfiguration = AppBarConfiguration(
+        appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.dashboardFragment2,
                 R.id.viewProfileFragment3,
@@ -42,12 +35,15 @@ class StudentActivity : AppCompatActivity() {
             ), binding.studentDrawer
         )
 
+        setupNavigationMenu(navController)
+        setSupportActionBar(binding.myToolbar)
+        setupActionBar(navController,
+            appBarConfiguration)
+
         binding.myToolbar.setupWithNavController(navController, appBarConfiguration)
-
         setupDrawerContent(binding.navigationView)
-
-
     }
+
 
     private fun setupDrawerContent(navigationView: NavigationView) {
         navigationView.setNavigationItemSelectedListener {
@@ -63,6 +59,12 @@ class StudentActivity : AppCompatActivity() {
             binding.studentDrawer.closeDrawers()
             true
         }
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return navController.navigateUp()
     }
 
     private fun logout() {
@@ -70,5 +72,17 @@ class StudentActivity : AppCompatActivity() {
         navController.navigate(R.id.action_dashboardFragment2_to_verificationActivity4)
     }
 
+    private fun setupNavigationMenu(navController: NavController) {
+        val sideNavView = binding.navigationView
+        sideNavView.setupWithNavController(navController)
+    }
+
+    private fun setupActionBar(navController: NavController,
+                               appBarConfig : AppBarConfiguration) {
+        setupActionBarWithNavController(navController, appBarConfig)
+    }
+
+
 
 }
+

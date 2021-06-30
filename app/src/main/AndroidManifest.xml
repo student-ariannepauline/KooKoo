@@ -13,12 +13,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         >
-        <activity android:name=".student.ui.ClassActivity"></activity>
+        <activity android:name=".student.ui.ClassActivity" />
         <activity android:name=".testKolanglods.ui.PangTestingLangLodsActivity" />
         <activity android:name=".NavigationController" />
         <activity
             android:name=".student.ui.StudentActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".verification.ui.activity.VerificationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

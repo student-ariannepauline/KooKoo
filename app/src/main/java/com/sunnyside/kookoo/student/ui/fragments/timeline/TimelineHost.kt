@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.google.firebase.auth.FirebaseUser
 import com.sunnyside.kookoo.R
+import com.sunnyside.kookoo.setAppBarTitle
+import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.model.JoinedClassModel
 
 
@@ -22,7 +24,11 @@ class TimelineHost : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setAppBarTitle(JoinedClass.joinedClass.name)
         return inflater.inflate(R.layout.fragment_timeline_host, container, false)
+
     }
+
+
 
 }

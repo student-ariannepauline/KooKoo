@@ -7,6 +7,7 @@
     tools:context=".student.ui.fragments.admin.AddPostFragment"
     >
 
+<!--
 
     <ImageButton
         android:id="@+id/btnBack"
@@ -57,6 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnPost" />
+-->
 
 
     <com.google.android.material.card.MaterialCardView

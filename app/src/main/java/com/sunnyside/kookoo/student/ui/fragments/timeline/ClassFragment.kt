@@ -65,7 +65,6 @@ class ClassFragment() : Fragment() {
         }
 
 
-
         return view
     }
 

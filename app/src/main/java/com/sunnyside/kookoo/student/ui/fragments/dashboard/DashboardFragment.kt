@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ListenerRegistration
@@ -53,7 +54,6 @@ class DashboardFragment : Fragment() {
         if (user != null) {
             userName = user.displayName.toString()
         }
-
     }
 
     override fun onCreateView(
@@ -64,6 +64,7 @@ class DashboardFragment : Fragment() {
         _binding = FragmentNavDashboardBinding.inflate(inflater, container, false)
         val view = binding.root
         val adapter = JoinedClassListAdapter() { joinedClass ->
+
             val action = DashboardFragmentDirections.actionDashboardFragment2ToClassFragment2(joinedClass)
             findNavController().navigate(action)
         }

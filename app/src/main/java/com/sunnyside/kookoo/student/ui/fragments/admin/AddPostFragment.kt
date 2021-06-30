@@ -1,9 +1,12 @@
 package com.sunnyside.kookoo.student.ui.fragments.admin
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,6 +17,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentAddPostBinding
+import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.model.AnnouncementModel
 import com.sunnyside.kookoo.student.model.JoinedClassModel
@@ -28,9 +32,27 @@ class AddPostFragment : Fragment() {
     private val binding get() = _binding!!
     private val currentUser = Firebase.auth.currentUser
     private lateinit var addPostViewModel: AddPostViewModel
-    private lateinit var joinedClass : JoinedClassModel
+    private lateinit var joinedClass: JoinedClassModel
 
     private lateinit var classId: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.add_post_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_post -> {
+            post()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +66,9 @@ class AddPostFragment : Fragment() {
 
         val view = binding.root
 
+
         setupView()
+        setAppBarTitle("Make an Announcement")
 
         return view
     }
@@ -53,13 +77,6 @@ class AddPostFragment : Fragment() {
         binding.textName.text = currentUser?.displayName.toString()
         binding.textClassroom.text = JoinedClass.joinedClass.name
 
-        binding.btnPost.setOnClickListener {
-            post()
-        }
-
-        binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
 
         binding.btnDatePicker.setOnClickListener {
             val pickerFragment = DatePicker() { selectedDate ->
@@ -83,6 +100,7 @@ class AddPostFragment : Fragment() {
             )
             addPostViewModel.addPost(newPost, classId)
             findNavController().popBackStack()
+            setAppBarTitle(joinedClass.name)
         }
     }
 
@@ -91,7 +109,7 @@ class AddPostFragment : Fragment() {
         _binding = null
     }
 
-    private fun checkInput() : Boolean {
+    private fun checkInput(): Boolean {
         val conditions = listOf(
             !binding.edittextTitle.text.isNullOrBlank(),
             !binding.edittextBody.text.isNullOrBlank(),

@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.ActivityClassBinding
 import com.sunnyside.kookoo.databinding.FragmentCalendarBinding
+import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.model.CalendarAnnouncementModel
 import com.sunnyside.kookoo.student.model.CalendarForecastModel
@@ -47,6 +49,8 @@ class CalendarFragment : Fragment() {
         formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
         setDate()
         getEvents()
+
+
     }
 
     override fun onCreateView(
@@ -72,6 +76,8 @@ class CalendarFragment : Fragment() {
         mCalendarViewModel.events.observe(viewLifecycleOwner, Observer { events ->
             adapter.setData(events)
         })
+
+        setAppBarTitle(JoinedClass.joinedClass.name)
 
 
         return view

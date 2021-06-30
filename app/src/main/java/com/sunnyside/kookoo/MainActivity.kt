@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -33,5 +34,13 @@ class MainActivity : AppCompatActivity() {
             intent = Intent(this, VerificationActivity::class.java)
             startActivity(intent)
         }
+    }
+}
+
+fun Fragment.setAppBarTitle(title : String) {
+    val my_activity = activity as AppCompatActivity?
+
+    my_activity?.supportActionBar?.let { actionBar ->
+        actionBar.title = title
     }
 }

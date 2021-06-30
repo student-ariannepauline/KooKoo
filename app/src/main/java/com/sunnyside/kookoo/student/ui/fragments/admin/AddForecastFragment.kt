@@ -1,15 +1,15 @@
 package com.sunnyside.kookoo.student.ui.fragments.admin
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentAddForecastBinding
+import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.model.ForecastModel
 import com.sunnyside.kookoo.student.model.JoinedClassModel
@@ -31,6 +31,25 @@ class AddForecastFragment : Fragment() {
     private lateinit var meetingDate : LocalDate
     private lateinit var meetingTime : LocalTime
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.add_post_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_post -> {
+            post()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,9 +60,12 @@ class AddForecastFragment : Fragment() {
         joinedClass = JoinedClass.joinedClass
         classId = joinedClass.class_id
 
+
+
         val view = binding.root
 
         setupView()
+        setAppBarTitle("Add Forecast")
 
         return view
     }
@@ -51,10 +73,6 @@ class AddForecastFragment : Fragment() {
     private fun setupView() {
         binding.textName.text = currentUser?.displayName.toString()
         binding.textClassroom.text = JoinedClass.joinedClass.name
-
-        binding.btnPost.setOnClickListener {
-            post()
-        }
 
         binding.btnDatePicker.setOnClickListener {
             val pickerFragment = DatePicker() { selectedDate ->
@@ -90,6 +108,7 @@ class AddForecastFragment : Fragment() {
 
         findNavController().popBackStack()
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
