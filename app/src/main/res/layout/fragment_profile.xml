@@ -16,12 +16,17 @@
             android:layout_width="match_parent"
             android:layout_height="250dp">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgProfilePfp"
-                android:layout_width="match_parent"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
-                app:srcCompat="@drawable/profile_picture" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_picture"
+                app:shapeAppearanceOverlay="@style/imgView_Circular"
+                app:strokeColor="@color/dirtyWhite"
+                app:strokeWidth="3dp" />
 
             <TextView
                 android:id="@+id/profile_name"
@@ -62,8 +67,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="EMAIL"
                 android:textColorHint="@color/black"
-                app:hintEnabled="true"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profile_email"
@@ -84,8 +89,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="CONTACT"
                 android:textColorHint="@color/black"
-                app:hintEnabled="true"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profile_number"
@@ -105,8 +110,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="ADDRESS"
                 android:textColorHint="@color/black"
-                app:hintEnabled="true"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profile_address"
@@ -127,8 +132,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="BIRTH DAY"
                 android:textColorHint="@color/black"
-                app:hintEnabled="true"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profile_birthday"
@@ -148,8 +153,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="PASSWORD"
                 android:textColorHint="@color/black"
-                app:hintEnabled="true"
-                app:endIconMode="password_toggle">
+                app:endIconMode="password_toggle"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
