@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.student.model.AnnouncementModel
@@ -14,10 +15,18 @@ import java.time.ZoneId
 
 class ForecastViewModel(application: Application) : AndroidViewModel(application) {
     private val db = Firebase.firestore
-    val forecasts: MutableLiveData<List<ForecastModel>> = MutableLiveData()
+    val forecasts: MutableLiveData<ArrayList<ForecastModel>> = MutableLiveData()
+
+    fun deleteForecast(documentId : String) {
+        db.collection("forecasts").document(documentId).delete()
+            .addOnSuccessListener { Log.d("tite", "DocumentSnapshot successfully deleted!") }
+            .addOnFailureListener { e -> Log.w("tite", "Error deleting document", e) }
+    }
+
 
     fun getForecasts(classId: String): ListenerRegistration {
         val docRef = db.collection("forecasts").whereEqualTo("class_id", classId)
+            .orderBy("meeting_time", Query.Direction.DESCENDING)
 
         return docRef.addSnapshotListener { documents, e ->
             if (e != null) {
@@ -26,7 +35,7 @@ class ForecastViewModel(application: Application) : AndroidViewModel(application
             }
 
             if (documents != null && !documents.isEmpty) {
-                val forecastListResponse: MutableList<ForecastModel> = mutableListOf()
+                val forecastListResponse = ArrayList<ForecastModel>()
 
                 for (document in documents) {
                     val title = document["title"] as String
@@ -39,6 +48,7 @@ class ForecastViewModel(application: Application) : AndroidViewModel(application
                             .toLocalDateTime()
 
                     val forecast = ForecastModel(
+                        document.id,
                         title,
                         link,
                         status,

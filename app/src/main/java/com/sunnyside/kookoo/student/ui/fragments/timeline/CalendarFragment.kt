@@ -54,6 +54,7 @@ class CalendarFragment : Fragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
         inflater.inflate(R.menu.invite_menu, menu)
     }
 

@@ -39,7 +39,11 @@
         android:id="@+id/classAdminFragment"
         android:name="com.sunnyside.kookoo.student.ui.fragments.admin.ClassAdminFragment"
         android:label="fragment_class_admin"
-        tools:layout="@layout/fragment_class_admin" />
+        tools:layout="@layout/fragment_class_admin" >
+        <argument
+            android:name="joinedClass"
+            app:argType="com.sunnyside.kookoo.student.model.JoinedClassModel" />
+    </fragment>
     <fragment
         android:id="@+id/createClassTestFragment2"
         android:name="com.sunnyside.kookoo.testKolanglods.ui.CreateClassTestFragment"
@@ -62,7 +66,7 @@
         android:id="@+id/classFragment2"
         android:name="com.sunnyside.kookoo.student.ui.fragments.timeline.ClassFragment"
         android:label="fragment_class"
-        tools:layout="@layout/fragment_class" >
+        tools:layout="@layout/fragment_class">
         <argument
             android:name="joined_class"
             app:argType="com.sunnyside.kookoo.student.model.JoinedClassModel" />

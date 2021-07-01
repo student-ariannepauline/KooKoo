@@ -9,6 +9,7 @@ import java.util.*
 
 @Parcelize
 data class AnnouncementModel(
+    val documentID : String,
     val author_name : String,
     val pic_link : String,
     val title: String,

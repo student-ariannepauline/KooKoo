@@ -1,19 +1,16 @@
 package com.sunnyside.kookoo.student.ui.fragments.timeline
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ListenerRegistration
 import com.sunnyside.kookoo.R
-import com.sunnyside.kookoo.databinding.FragmentTimelineAdminBinding
 import com.sunnyside.kookoo.databinding.FragmentTimelineBinding
+import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.ui.adapters.AnnouncementsListAdapter
 import com.sunnyside.kookoo.student.ui.viewmodel.TimelineViewModel
@@ -30,6 +27,23 @@ class TimelineFragment : Fragment() {
         super.onCreate(savedInstanceState)
         mTimelineViewModel = ViewModelProvider(this).get(TimelineViewModel::class.java)
         classId = JoinedClass.joinedClass.class_id
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.invite_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_invite -> {
+            findNavController().navigate(R.id.inviteFragment)
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onStart() {
@@ -51,15 +65,18 @@ class TimelineFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentTimelineBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = AnnouncementsListAdapter()
+        val adapter = AnnouncementsListAdapter(mTimelineViewModel)
         val recyclerView = binding.timelineRecyclerView
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+
         mTimelineViewModel.announcements.observe(viewLifecycleOwner, Observer { announcements ->
             adapter.setData(announcements)
         })
+
+        setAppBarTitle(JoinedClass.joinedClass.name)
 
 
         return view

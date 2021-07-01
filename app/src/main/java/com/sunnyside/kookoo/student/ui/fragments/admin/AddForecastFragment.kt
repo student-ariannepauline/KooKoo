@@ -2,6 +2,7 @@ package com.sunnyside.kookoo.student.ui.fragments.admin
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -20,6 +21,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.format.DateTimeParseException
 
 class AddForecastFragment : Fragment() {
     private var _binding: FragmentAddForecastBinding? = null
@@ -30,6 +32,12 @@ class AddForecastFragment : Fragment() {
     private lateinit var classId: String
     private lateinit var meetingDate : LocalDate
     private lateinit var meetingTime : LocalTime
+
+    /*New Forecast Variables*/
+    private lateinit var title : String
+    private lateinit var link : String
+    private lateinit var status : String
+    private lateinit var meetingDateTime : LocalDateTime
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,16 +106,40 @@ class AddForecastFragment : Fragment() {
     }
 
     private fun post() {
-        val newForecast = ForecastModel(
-            binding.edittextTitleForecast.text.toString(),
-            binding.edittextOtherContentForecast.text.toString(),
-            "CONFIRMED",
-            LocalDateTime.of(meetingDate, meetingTime)
-        )
 
-        addForecastViewModel.addForecast(newForecast, classId)
+        binding.edittextTitleForecast.text.isNotEmpty().apply {
+            title = binding.edittextTitleForecast.text.toString()
+        }
 
-        findNavController().popBackStack()
+        link = binding.edittextOtherContentForecast.text.toString()
+
+
+        try {
+            meetingDateTime = LocalDateTime.of(meetingDate, meetingTime)
+        }catch (e: DateTimeParseException) {
+            Toast.makeText(activity, "Please select a meeting date and time", Toast.LENGTH_LONG).show()
+        }
+        catch (e: UninitializedPropertyAccessException) {
+            Toast.makeText(activity, "Please select a meeting date and time", Toast.LENGTH_LONG).show()
+        }
+
+        try {
+            val newForecast = ForecastModel(
+                "sksksks",
+                title,
+                link,
+                "CONFIRMED",
+                meetingDateTime
+            )
+
+
+            addForecastViewModel.addForecast(newForecast, classId)
+
+            findNavController().popBackStack()
+        } catch (e: UninitializedPropertyAccessException) {
+            Toast.makeText(activity, "Please fill out the form", Toast.LENGTH_LONG).show()
+        }
+
     }
 
 

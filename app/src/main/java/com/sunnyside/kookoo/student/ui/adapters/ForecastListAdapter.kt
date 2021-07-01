@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sunnyside.kookoo.databinding.CardLayoutForecastBinding
 import com.sunnyside.kookoo.student.model.ForecastModel
 import com.sunnyside.kookoo.student.model.JoinedClassModel
+import com.sunnyside.kookoo.student.ui.viewmodel.ForecastViewModel
 import java.time.format.DateTimeFormatter
 
-class ForecastListAdapter(private val listener: (ForecastModel) -> Unit) : RecyclerView.Adapter<ForecastListAdapter.MyViewHolder>() {
-    private var forecastList = emptyList<ForecastModel>()
+class ForecastListAdapter(val forecastViewModel: ForecastViewModel, private val listener: (ForecastModel) -> Unit) : RecyclerView.Adapter<ForecastListAdapter.MyViewHolder>() {
+    private var forecastList = ArrayList<ForecastModel>()
 
     class MyViewHolder(val itemBinding: CardLayoutForecastBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(forecast: ForecastModel) {
@@ -35,8 +36,16 @@ class ForecastListAdapter(private val listener: (ForecastModel) -> Unit) : Recyc
         return forecastList.size
     }
 
-    fun setData(forecasts: List<ForecastModel>) {
+    fun setData(forecasts: ArrayList<ForecastModel>) {
         forecastList = forecasts
         notifyDataSetChanged()
+    }
+
+    fun deleteItem(pos : Int) {
+        val forecastToDelete: ForecastModel = forecastList[pos]
+        forecastViewModel.deleteForecast(forecastToDelete.documentID)
+        forecastList.removeAt(pos)
+
+        notifyItemRemoved(pos)
     }
 }

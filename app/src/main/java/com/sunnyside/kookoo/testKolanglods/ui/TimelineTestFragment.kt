@@ -54,7 +54,7 @@ class TimelineTestFragment : Fragment() {
     ): View? {
         _binding = FragmentTimelineTestBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = AnnouncementsListAdapter()
+        val adapter = AnnouncementsListAdapter(mTimelineViewModel)
         val recyclerView = binding.timelineTestList
 
         recyclerView.adapter = adapter
@@ -66,7 +66,7 @@ class TimelineTestFragment : Fragment() {
 
 
         binding.addPostButton.setOnClickListener {
-            findNavController().navigate(R.id.action_timelineTestFragment2_to_addPostFragment2)
+            findNavController().navigate(R.id.action_timelineAdminFragment2_to_addPostFragment2)
         }
 
         return view

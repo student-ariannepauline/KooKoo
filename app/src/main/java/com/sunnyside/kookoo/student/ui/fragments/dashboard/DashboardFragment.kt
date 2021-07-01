@@ -68,9 +68,14 @@ class DashboardFragment : Fragment() {
         _binding = FragmentNavDashboardBinding.inflate(inflater, container, false)
         val view = binding.root
         val adapter = JoinedClassListAdapter() { joinedClass ->
+            if (!joinedClass.is_admin) {
+                val action = DashboardFragmentDirections.actionDashboardFragment2ToClassFragment2(joinedClass)
+                findNavController().navigate(action)
+            } else {
+                val action = DashboardFragmentDirections.actionDashboardFragment2ToClassAdminFragment(joinedClass)
+                findNavController().navigate(action)
+            }
 
-            val action = DashboardFragmentDirections.actionDashboardFragment2ToClassFragment2(joinedClass)
-            findNavController().navigate(action)
         }
         val recyclerView = binding.joinedClassesList
 

@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ListenerRegistration
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentTimelineAdminBinding
-import com.sunnyside.kookoo.databinding.FragmentTimelineTestBinding
 import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.ui.adapters.AnnouncementsListAdapter
+import com.sunnyside.kookoo.student.ui.adapters.SwipeToDeleteAnnouncement
 import com.sunnyside.kookoo.student.ui.viewmodel.TimelineViewModel
 
 class TimelineAdminFragment : Fragment() {
@@ -50,7 +51,7 @@ class TimelineAdminFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentTimelineAdminBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = AnnouncementsListAdapter()
+        val adapter = AnnouncementsListAdapter(mTimelineViewModel)
         val recyclerView = binding.timelineTestList
 
         recyclerView.adapter = adapter
@@ -60,9 +61,12 @@ class TimelineAdminFragment : Fragment() {
             adapter.setData(announcements)
         })
 
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteAnnouncement(adapter))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
 
         binding.addPostButton.setOnClickListener {
-            findNavController().navigate(R.id.action_timelineTestFragment2_to_addPostFragment2)
+            findNavController().navigate(R.id.action_timelineAdminFragment2_to_addPostFragment2)
         }
 
         return view

@@ -7,11 +7,11 @@ import com.sunnyside.kookoo.databinding.CardLayoutForecastBinding
 import com.sunnyside.kookoo.databinding.CardLayoutHomeBinding
 import com.sunnyside.kookoo.databinding.CardLayoutJoinedClassTestBinding
 import com.sunnyside.kookoo.student.model.AnnouncementModel
+import com.sunnyside.kookoo.student.ui.viewmodel.TimelineViewModel
 import java.time.format.DateTimeFormatter
 
-class AnnouncementsListAdapter : RecyclerView.Adapter<AnnouncementsListAdapter.MyViewHolder>() {
-    private var announcementList = emptyList<AnnouncementModel>()
-
+class AnnouncementsListAdapter(val timelineViewModel: TimelineViewModel) : RecyclerView.Adapter<AnnouncementsListAdapter.MyViewHolder>() {
+    private var announcementList = ArrayList<AnnouncementModel>()
 
     class MyViewHolder(val itemBinding: CardLayoutHomeBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
@@ -44,9 +44,17 @@ class AnnouncementsListAdapter : RecyclerView.Adapter<AnnouncementsListAdapter.M
         return announcementList.size
     }
 
-    fun setData(announcements: List<AnnouncementModel>) {
+    fun setData(announcements: ArrayList<AnnouncementModel>) {
         this.announcementList = announcements
         notifyDataSetChanged()
+    }
+
+    fun deleteItem(pos: Int) {
+        val announcementToDelete: AnnouncementModel = announcementList[pos]
+        timelineViewModel.deleteAnnouncement(announcementToDelete.documentID)
+        announcementList.removeAt(pos)
+
+        notifyItemRemoved(pos)
     }
 
 

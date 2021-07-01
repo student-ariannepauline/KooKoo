@@ -25,21 +25,19 @@ import com.sunnyside.kookoo.testKolanglods.ui.TimelineTestFragment
 import kotlinx.android.synthetic.main.card_layout_joined_class_test.*
 
 class ClassFragment() : Fragment() {
-    lateinit var navView: BottomNavigationView
-
     private var _binding: ActivityClassBinding? = null
     private val binding get() = _binding!!
     private val args: ClassFragmentArgs by navArgs()
 
-    private lateinit var timelineFragment: TimelineHost
-    private lateinit var forecastFragment: ForecastHost
+    private lateinit var timelineFragment: TimelineFragment
+    private lateinit var forecastFragment: ForecastFragment
     private lateinit var calendarFragment: CalendarFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        timelineFragment = TimelineHost()
-        forecastFragment = ForecastHost()
+        timelineFragment = TimelineFragment()
+        forecastFragment = ForecastFragment()
         calendarFragment = CalendarFragment()
 
         JoinedClass.enterClass(args.joinedClass)

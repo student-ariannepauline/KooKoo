@@ -25,6 +25,7 @@ import com.sunnyside.kookoo.student.ui.pickers.DatePicker
 import com.sunnyside.kookoo.student.ui.viewmodel.AddPostViewModel
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.format.DateTimeParseException
 
 
 class AddPostFragment : Fragment() {
@@ -36,10 +37,21 @@ class AddPostFragment : Fragment() {
 
     private lateinit var classId: String
 
+    /*New Post Variables*/
+    private lateinit var authorName: String
+    private lateinit var picLink: String
+    private lateinit var title: String
+    private lateinit var body: String
+    private lateinit var link: String
+    private lateinit var deadline: LocalDate
+    private lateinit var timestamp: LocalDateTime
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         inflater.inflate(R.menu.add_post_menu, menu)
@@ -89,35 +101,53 @@ class AddPostFragment : Fragment() {
     }
 
     private fun post() {
-        if (checkInput()) {
+
+        currentUser?.displayName?.let { displayName ->
+            authorName = displayName
+        }
+
+        picLink = "wala_pa"
+
+        binding.edittextTitle.text.toString().trim().isBlank().apply {
+            title = binding.edittextTitle.text.toString()
+        }
+
+        body = binding.edittextBody.text.toString()
+        link = binding.edittextOtherContent.text.toString()
+
+
+        try {
+            deadline = LocalDate.parse(binding.btnDatePicker.text)
+        } catch (e: DateTimeParseException) {
+            Toast.makeText(activity, "Please choose a deadline", Toast.LENGTH_LONG).show()
+        }
+
+        timestamp = LocalDateTime.now()
+
+        try {
             val newPost = AnnouncementModel(
-                currentUser?.displayName.toString(),
-                "wala_pa",
-                binding.edittextTitle.text.toString(),
-                binding.edittextBody.text.toString(),
-                binding.edittextOtherContent.text.toString(),
-                LocalDate.parse(binding.btnDatePicker.text),
-                LocalDateTime.now()
+                "sksksks",
+                authorName,
+                picLink,
+                title,
+                body,
+                link,
+                deadline,
+                timestamp
             )
+
             addPostViewModel.addPost(newPost, classId)
             findNavController().popBackStack()
             setAppBarTitle(joinedClass.name)
+
+        } catch (e: UninitializedPropertyAccessException) {
+            Toast.makeText(activity, "Please fill out the form", Toast.LENGTH_LONG).show()
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun checkInput(): Boolean {
-        val conditions = listOf(
-            !binding.edittextTitle.text.isNullOrBlank(),
-            !binding.edittextBody.text.isNullOrBlank(),
-            binding.btnDatePicker.text != "Set Deadline"
-        )
-
-        return conditions.all { true }
     }
 
 }
