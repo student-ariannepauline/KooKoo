@@ -2,12 +2,14 @@ package com.sunnyside.kookoo.student.ui.viewmodel
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import com.sunnyside.kookoo.student.model.JoinedClassModel
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
@@ -47,6 +49,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                                     )
                                 )
                             }
+                            subscribeToClass(classId)
                         }
                 }
             }
@@ -102,36 +105,27 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
             }
 
         }
+    }
 
-/*        db.collection("classes_joined")
-            .whereEqualTo("__name__", uid)
-            .get()
-            .addOnSuccessListener { documents ->
-                if (!documents.isEmpty) {
-                    val document = documents.first()
-                    val classes = document.data["classes"] as List<*>
-                    val joinedClassesResponseModel: MutableList<JoinedClassModel> = mutableListOf()
-
-                    for (joinedClassMap in classes) {
-                        joinedClassMap as Map<*, *>
-                        val classId = joinedClassMap["class_id"]
-                        val className = joinedClassMap["name"]
-                        val isAdmin = joinedClassMap["is_admin"]
-                        val joinedClass = JoinedClassModel(
-                            classId as String,
-                            className as String,
-                            isAdmin as Boolean
-                        )
-
-                        joinedClassesResponseModel += joinedClass
-
-
-                    }
-
-                    joinedClassesModel.value = joinedClassesResponseModel
-                    Log.d("Tite", joinedClassesModel.value.toString())
-
+    private fun subscribeToClass(classID : String) {
+        Firebase.messaging.subscribeToTopic(classID)
+            .addOnCompleteListener { task ->
+                var msg = "SUBSCRIBED to $classID"
+                if (!task.isSuccessful) {
+                    msg = "Can't SUBSCRIBED"
                 }
-            }*/
+                Log.d("tite", msg)
+            }
+    }
+
+    fun unsubscribeToClass(classID : String) {
+        Firebase.messaging.unsubscribeFromTopic(classID)
+            .addOnCompleteListener { task ->
+                var msg = "UNSUBSCRIBED to $classID"
+                if (!task.isSuccessful) {
+                    msg = "Can't UNSUBSCRIBED"
+                }
+                Log.d("tite", msg)
+            }
     }
 }
