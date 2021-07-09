@@ -10,6 +10,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentAddForecastBinding
+import com.sunnyside.kookoo.hideKeyboard
 import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.model.ForecastModel
@@ -28,16 +29,16 @@ class AddForecastFragment : Fragment() {
     private val binding get() = _binding!!
     private val currentUser = Firebase.auth.currentUser
     private lateinit var addForecastViewModel: AddForecastViewModel
-    private lateinit var joinedClass : JoinedClassModel
+    private lateinit var joinedClass: JoinedClassModel
     private lateinit var classId: String
-    private lateinit var meetingDate : LocalDate
-    private lateinit var meetingTime : LocalTime
+    private lateinit var meetingDate: LocalDate
+    private lateinit var meetingTime: LocalTime
 
     /*New Forecast Variables*/
-    private lateinit var title : String
-    private lateinit var link : String
-    private lateinit var status : String
-    private lateinit var meetingDateTime : LocalDateTime
+    private lateinit var title: String
+    private lateinit var link: String
+    private lateinit var status: String
+    private lateinit var meetingDateTime: LocalDateTime
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +69,6 @@ class AddForecastFragment : Fragment() {
         addForecastViewModel = ViewModelProvider(this).get(AddForecastViewModel::class.java)
         joinedClass = JoinedClass.joinedClass
         classId = joinedClass.class_id
-
 
 
         val view = binding.root
@@ -103,6 +103,10 @@ class AddForecastFragment : Fragment() {
             }
             timePickerFragment.show(childFragmentManager, "timePicker")
         }
+
+        hideKeyboard(binding.edittextTitleForecast)
+        hideKeyboard(binding.edittextOtherContentForecast)
+
     }
 
     private fun post() {
@@ -116,11 +120,12 @@ class AddForecastFragment : Fragment() {
 
         try {
             meetingDateTime = LocalDateTime.of(meetingDate, meetingTime)
-        }catch (e: DateTimeParseException) {
-            Toast.makeText(activity, "Please select a meeting date and time", Toast.LENGTH_LONG).show()
-        }
-        catch (e: UninitializedPropertyAccessException) {
-            Toast.makeText(activity, "Please select a meeting date and time", Toast.LENGTH_LONG).show()
+        } catch (e: DateTimeParseException) {
+            Toast.makeText(activity, "Please select a meeting date and time", Toast.LENGTH_LONG)
+                .show()
+        } catch (e: UninitializedPropertyAccessException) {
+            Toast.makeText(activity, "Please select a meeting date and time", Toast.LENGTH_LONG)
+                .show()
         }
 
         try {

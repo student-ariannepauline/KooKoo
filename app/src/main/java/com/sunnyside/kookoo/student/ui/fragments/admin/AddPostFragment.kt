@@ -17,6 +17,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentAddPostBinding
+import com.sunnyside.kookoo.hideKeyboard
 import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.model.AnnouncementModel
@@ -98,6 +99,11 @@ class AddPostFragment : Fragment() {
 
             pickerFragment.show(childFragmentManager, "datePicker")
         }
+
+        hideKeyboard(binding.edittextTitle)
+        hideKeyboard(binding.edittextBody)
+        hideKeyboard(binding.edittextOtherContent)
+
     }
 
     private fun post() {

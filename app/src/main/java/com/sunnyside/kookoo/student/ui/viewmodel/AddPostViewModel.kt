@@ -8,6 +8,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.sunnyside.kookoo.notification.api.NotificationSender
 import com.sunnyside.kookoo.notification.api.RetrofitInstance
 import com.sunnyside.kookoo.student.data.UserToken
 import com.sunnyside.kookoo.student.model.AnnouncementModel
@@ -31,7 +32,7 @@ class AddPostViewModel(application: Application) : AndroidViewModel(application)
 
         val userToken = UserToken.token
 
-        sendNotificationToClass(userToken, classId,"New Announcement!", announcement.title )
+        NotificationSender.sendNotificationToClass(userToken, classId,"New Announcement!", announcement.title )
 
         val newPost = hashMapOf(
             "class_id" to classId,
@@ -84,24 +85,4 @@ class AddPostViewModel(application: Application) : AndroidViewModel(application)
                 Log.w("tite", "Error adding document", e)
             }
     }
-
-    fun sendNotificationToClass(userToken : String, classId : String, title : String, body : String) {
-        GlobalScope.launch(Dispatchers.Main) {
-            try {
-                val response = RetrofitInstance.api.notifyClass(userToken, classId, title, body)
-
-                if (response.isSuccessful) {
-                    val message = response.body()
-
-                    if (message != null) {
-                        Log.d("tite", "sent by ${message.message["sent by"]}")
-                    }
-                }
-            } catch (e : SocketTimeoutException) {
-                Log.w("tite", "Can't connect to server.", e)
-            }
-        }
-        Log.d("tite", title)
-    }
-
 }

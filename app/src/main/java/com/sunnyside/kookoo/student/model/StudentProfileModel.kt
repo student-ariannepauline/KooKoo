@@ -1,7 +1,10 @@
 package com.sunnyside.kookoo.student.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class StudentProfileModel(
     val uid: String = "",
     val firstName: String = "",
@@ -11,5 +14,6 @@ data class StudentProfileModel(
     val email: String = "",
     val birthDate: Date = Date(),
     val program: String = "",
-    val level: Long = -1
-)
+    val level: Long = -1,
+    val picLink : String
+) : Parcelable

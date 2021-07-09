@@ -75,7 +75,11 @@
         android:id="@+id/viewProfileFragment3"
         android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.ViewProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_viewProfileFragment3_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <include app:graph="@navigation/pangtest_navigation" />
     <fragment
         android:id="@+id/settingsFragment3"
@@ -92,4 +96,13 @@
         android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.InviteFragment"
         android:label="fragment_invite_code"
         tools:layout="@layout/fragment_invite_code" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="profile"
+            app:argType="com.sunnyside.kookoo.student.model.StudentProfileModel" />
+    </fragment>
 </navigation>

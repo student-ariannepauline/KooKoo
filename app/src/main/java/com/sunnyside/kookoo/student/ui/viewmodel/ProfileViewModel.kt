@@ -40,10 +40,10 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
                     date,
                     document.data["program"].toString(),
                     level,
+                    "sksksk"
                 )
             }
 
         }
-
     }
 }

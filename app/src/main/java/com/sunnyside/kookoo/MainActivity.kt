@@ -1,9 +1,12 @@
 package com.sunnyside.kookoo
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.tasks.OnCompleteListener
@@ -66,6 +69,16 @@ fun Fragment.setAppBarTitle(title : String) {
 
     my_activity?.supportActionBar?.let { actionBar ->
         actionBar.title = title
+    }
+}
+
+fun Fragment.hideKeyboard(view: View) {
+    val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+
+    view.setOnFocusChangeListener {_view, _hasFocus ->
+        if (!_hasFocus) {
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 }
 

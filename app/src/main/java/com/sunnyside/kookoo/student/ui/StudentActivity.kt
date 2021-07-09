@@ -1,6 +1,9 @@
 package com.sunnyside.kookoo.student.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -81,6 +84,7 @@ class StudentActivity : AppCompatActivity() {
                                appBarConfig : AppBarConfiguration) {
         setupActionBarWithNavController(navController, appBarConfig)
     }
+
 
 
 

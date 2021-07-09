@@ -5,12 +5,16 @@
     android:id="@+id/student_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".student.ui.StudentActivity">
+    tools:context=".student.ui.StudentActivity"
+ >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/my_toolbar"
