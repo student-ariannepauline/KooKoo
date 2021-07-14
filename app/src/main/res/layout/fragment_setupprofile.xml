@@ -9,17 +9,15 @@
 
     <TextView
         android:id="@+id/textSetupYourProfile"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="113dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="114dp"
         android:fontFamily="@font/metropolis_semibold"
         android:text="Setting up your Profile"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,22 +25,23 @@
         android:id="@+id/setupPfp"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_outline_camera"
-        app:layout_constraintTop_toBottomOf="@+id/textSetupYourProfile"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSetupYourProfile"
         app:shapeAppearanceOverlay="@style/imgView_Circular"
         app:strokeColor="@color/dirtyWhite"
         app:strokeWidth="3dp" />
 
     <TextView
         android:id="@+id/textSetupName"
-        android:layout_width="409dp"
-        android:layout_height="36dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/metropolis_semibold"
-        android:text="Arianne Ganda"
+        android:text="$Name"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="25sp"
@@ -53,10 +52,10 @@
 
     <TextView
         android:id="@+id/textSetupEmail"
-        android:layout_width="415dp"
-        android:layout_height="29dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/metropolis_medium"
-        android:text="arianneignacio28@gmail.com"
+        android:text="$email"
         android:textAlignment="center"
         android:textColor="@color/grey"
         android:textSize="18sp"
@@ -204,8 +203,8 @@
 
     <Button
         android:id="@+id/setupNext_btn"
-        android:layout_width="153dp"
-        android:layout_height="46dp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
         android:layout_marginStart="226dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"

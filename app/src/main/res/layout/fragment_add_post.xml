@@ -125,6 +125,7 @@
                 android:background="@drawable/textinput_rectangle"
                 android:fontFamily="@font/metropolis_bold"
                 android:hint="Your Title Here"
+                android:paddingEnd="10dp"
                 android:paddingStart="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"

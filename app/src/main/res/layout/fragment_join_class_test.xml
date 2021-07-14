@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:ems="12"
         android:fontFamily="@font/metropolis_regular"
+        android:hint="Enter Class Code"
         android:inputType="textPersonName"
-        android:text="Enter Class Code"
+        android:textColorHint="@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -32,7 +33,8 @@
         android:text="Join Class"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/testJoinBack_btn"
         app:layout_constraintTop_toBottomOf="@+id/testJoinClass_text" />
 
     <Button
@@ -41,14 +43,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="0dp"
         android:background="@drawable/button_forgotpassword"
         android:fontFamily="@font/metropolis_semibold"
         android:padding="8dp"
         android:text="Back"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/testJoinClass_btn"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/testJoinClass_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>
