@@ -107,6 +107,8 @@ class AddForecastFragment : Fragment() {
         hideKeyboard(binding.edittextTitleForecast)
         hideKeyboard(binding.edittextOtherContentForecast)
 
+
+
     }
 
     private fun post() {

@@ -7,7 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentTimelineBinding
 import com.sunnyside.kookoo.setAppBarTitle
@@ -19,6 +23,7 @@ class TimelineFragment : Fragment() {
     private lateinit var mTimelineViewModel: TimelineViewModel
     private lateinit var classId: String
     private lateinit var registration: ListenerRegistration
+    private lateinit var storage : FirebaseStorage
 
     private var _binding: FragmentTimelineBinding? = null
     private val binding get() = _binding!!
@@ -27,6 +32,7 @@ class TimelineFragment : Fragment() {
         super.onCreate(savedInstanceState)
         mTimelineViewModel = ViewModelProvider(this).get(TimelineViewModel::class.java)
         classId = JoinedClass.joinedClass.class_id
+        storage = Firebase.storage
 
         setHasOptionsMenu(true)
     }
@@ -65,7 +71,7 @@ class TimelineFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentTimelineBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = AnnouncementsListAdapter(mTimelineViewModel)
+        val adapter = AnnouncementsListAdapter(mTimelineViewModel, storage)
         val recyclerView = binding.timelineRecyclerView
 
         recyclerView.adapter = adapter

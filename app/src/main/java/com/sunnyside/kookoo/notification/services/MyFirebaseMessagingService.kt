@@ -35,7 +35,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             createNotificationChannel()
 
-            val builder = NotificationCompat.Builder(this, "TITE")
+            val builder = NotificationCompat.Builder(this, getString(R.string.CHANNEL_ID))
                 .setSmallIcon(R.drawable.applogo)
                 .setContentTitle(title)
                 .setContentText(body)
@@ -54,10 +54,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "TITE"
+            val name = getString(R.string.CHANNEL_ID)
             val descriptionText = "TITE CHANNEL"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel("TITE", name, importance).apply {
+            val channel = NotificationChannel(getString(R.string.CHANNEL_ID), name, importance).apply {
                 description = descriptionText
             }
             // Register the channel with the system

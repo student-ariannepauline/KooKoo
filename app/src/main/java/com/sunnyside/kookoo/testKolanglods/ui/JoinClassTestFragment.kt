@@ -12,10 +12,12 @@ import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentJoinClassTestBinding
 import com.sunnyside.kookoo.databinding.FragmentProfileBinding
+import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
+import com.sunnyside.kookoo.utilities.AppBarFragment
 
 
-class JoinClassTestFragment : Fragment() {
+class JoinClassTestFragment : AppBarFragment() {
     lateinit var mDashboardViewModel: DashboardViewModel
     private var _binding: FragmentJoinClassTestBinding? = null
     private val binding get() = _binding!!
@@ -47,6 +49,8 @@ class JoinClassTestFragment : Fragment() {
         binding.testJoinBackBtn.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        setAppBarTitle("Join a Class")
 
         return view
     }

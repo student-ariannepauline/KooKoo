@@ -12,9 +12,11 @@ import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentCreateClassTestBinding
 import com.sunnyside.kookoo.databinding.FragmentProfileBinding
+import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.ui.viewmodel.DashboardViewModel
+import com.sunnyside.kookoo.utilities.AppBarFragment
 
-class CreateClassTestFragment : Fragment() {
+class CreateClassTestFragment : AppBarFragment() {
     lateinit var mDashboardViewModel: DashboardViewModel
     private var _binding: FragmentCreateClassTestBinding? = null
     private val binding get() = _binding!!
@@ -40,6 +42,9 @@ class CreateClassTestFragment : Fragment() {
         binding.testJoinBackBtn.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        setAppBarTitle("Create Class")
+
         return view
     }
 

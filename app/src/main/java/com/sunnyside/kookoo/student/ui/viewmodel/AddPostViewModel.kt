@@ -10,6 +10,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.notification.api.NotificationSender
 import com.sunnyside.kookoo.notification.api.RetrofitInstance
+import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.data.UserToken
 import com.sunnyside.kookoo.student.model.AnnouncementModel
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +33,7 @@ class AddPostViewModel(application: Application) : AndroidViewModel(application)
 
         val userToken = UserToken.token
 
-        NotificationSender.sendNotificationToClass(userToken, classId,"New Announcement!", announcement.title )
+        NotificationSender.sendNotificationToClass(userToken, classId,"New Announcement! in ${JoinedClass.joinedClass.name}", announcement.title )
 
         val newPost = hashMapOf(
             "class_id" to classId,

@@ -11,10 +11,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentAddPostBinding
 import com.sunnyside.kookoo.hideKeyboard
@@ -88,9 +92,33 @@ class AddPostFragment : Fragment() {
     }
 
     private fun setupView() {
+        val db = Firebase.firestore
+
         binding.textName.text = currentUser?.displayName.toString()
         binding.textClassroom.text = JoinedClass.joinedClass.name
 
+        currentUser?.uid?.let { uid ->
+            val profileRef = db.collection("user_profile").whereEqualTo("uid", uid)
+
+            profileRef.get()
+                .addOnSuccessListener { documents ->
+                    if (documents != null && !documents.isEmpty) {
+                        val document = documents.first()
+
+                        picLink = document.data["picLink"] as String
+
+                        val storageRef = Firebase.storage.reference
+                        val image = storageRef.child("/profilePicture/${picLink}")
+
+                        image.downloadUrl
+                            .addOnSuccessListener { url ->
+                                Glide.with(this).
+                                load(url)
+                                    .into(binding.imgProfile)
+                            }
+                    }
+                }
+        }
 
         binding.btnDatePicker.setOnClickListener {
             val pickerFragment = DatePicker() { selectedDate ->
@@ -99,6 +127,8 @@ class AddPostFragment : Fragment() {
 
             pickerFragment.show(childFragmentManager, "datePicker")
         }
+
+
 
         hideKeyboard(binding.edittextTitle)
         hideKeyboard(binding.edittextBody)
@@ -111,8 +141,6 @@ class AddPostFragment : Fragment() {
         currentUser?.displayName?.let { displayName ->
             authorName = displayName
         }
-
-        picLink = "wala_pa"
 
         binding.edittextTitle.text.toString().trim().isBlank().apply {
             title = binding.edittextTitle.text.toString()

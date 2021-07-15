@@ -13,15 +13,65 @@ import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.student.model.AnnouncementModel
 import com.sunnyside.kookoo.student.model.JoinedClassModel
 import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class TimelineViewModel(application: Application) : AndroidViewModel(application) {
     private val db = Firebase.firestore
     val announcements: MutableLiveData<ArrayList<AnnouncementModel>> = MutableLiveData()
 
     fun deleteAnnouncement(documentId: String) {
-        db.collection("announcements").document(documentId).delete()
-            .addOnSuccessListener { Log.d("tite", "DocumentSnapshot successfully deleted!") }
-            .addOnFailureListener { e -> Log.w("tite", "Error deleting document", e) }
+        db.collection("announcements").document(documentId)
+
+        val docRef = db.collection("announcements").document(documentId)
+
+        docRef.get()
+            .addOnSuccessListener { document ->
+                val deadline = document["deadline"] as Timestamp
+                val deadlineLocalDate =
+                    deadline.toDate().toInstant().atZone(ZoneId.systemDefault())
+                        .toLocalDate()
+                val formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
+
+                val dateId = deadlineLocalDate.format(formatter)
+                val classId = document["class_id"] as String
+
+                val eventsRef = db.collection("events")
+                    .whereEqualTo("class_id", classId)
+                    .whereEqualTo("date", dateId)
+
+                eventsRef.get()
+                    .addOnSuccessListener { eventsDocuments ->
+                        if (eventsDocuments != null && !eventsDocuments.isEmpty) {
+                            val eventDocument = eventsDocuments.first()
+                            val events = eventDocument["events"] as ArrayList<*>
+
+                            val iter = events.iterator()
+
+                            while(iter.hasNext()) {
+                                val event = iter.next() as Map<*,*>
+                                val eventData = event["data"] as Map<*, *>
+                                val eventId = eventData["id"]
+
+                                if (eventId == documentId) {
+                                    iter.remove()
+                                }
+                            }
+
+                            db.collection("events").document(eventDocument.id)
+                                .update("events", events)
+                                .addOnSuccessListener {
+                                    Log.d("tite", "DocumentSnapshot successfully event!")
+                                }
+                                .addOnFailureListener {
+                                        e -> Log.w("tite", "Error deleting document", e)
+                                }
+                        }
+                    }
+
+                docRef.delete()
+                    .addOnSuccessListener { Log.d("tite", "DocumentSnapshot successfully deleted!") }
+                    .addOnFailureListener { e -> Log.w("tite", "Error deleting document", e) }
+            }
     }
 
     fun getAnnouncements(classId: String): ListenerRegistration {

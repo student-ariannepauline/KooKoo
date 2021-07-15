@@ -2,6 +2,7 @@ package com.sunnyside.kookoo.student.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.ActivityStudentBinding
+import com.sunnyside.kookoo.student.data.UserToken
 
 private lateinit var binding: ActivityStudentBinding
 private lateinit var navController: NavController
@@ -45,6 +47,8 @@ class StudentActivity : AppCompatActivity() {
 
         binding.myToolbar.setupWithNavController(navController, appBarConfiguration)
         setupDrawerContent(binding.navigationView)
+
+        Log.d("tite", UserToken.token)
     }
 
 
@@ -72,7 +76,7 @@ class StudentActivity : AppCompatActivity() {
 
     private fun logout() {
         Firebase.auth.signOut()
-        navController.navigate(R.id.action_dashboardFragment2_to_verificationActivity4)
+        navController.navigate(R.id.verificationActivity4)
     }
 
     private fun setupNavigationMenu(navController: NavController) {

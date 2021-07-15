@@ -31,16 +31,16 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
                 val level = document.data["level"] as Long
 
                 userProfileModel.value = StudentProfileModel(
-                    document.data["uid"].toString(),
-                    document.data["firstName"].toString(),
-                    document.data["lastName"].toString(),
-                    document.data["contactNumber"].toString(),
-                    document.data["address"].toString(),
-                    document.data["email"].toString(),
+                    document.data["uid"] as String,
+                    document.data["firstName"] as String,
+                    document.data["lastName"] as String,
+                    document.data["contactNumber"] as String,
+                    document.data["address"] as String,
+                    document.data["email"] as String,
                     date,
-                    document.data["program"].toString(),
+                    document.data["program"] as String,
                     level,
-                    "sksksk"
+                    document.data["picLink"] as String
                 )
             }
 

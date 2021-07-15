@@ -27,16 +27,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         auth = Firebase.auth
 
-        Firebase.messaging.subscribeToTopic("XyKnMkRPoCPcRRNDj0wR")
-            .addOnCompleteListener { task ->
-                var msg = "SUBSCRIBED to XyKnMkRPoCPcRRNDj0wR"
-                if (!task.isSuccessful) {
-                    msg = "Can't SUBSCRIBED"
-                }
-                Log.d("tite", msg)
-            }
-
         checkForLoggedInUser()
+
+
     }
 
     private fun checkForLoggedInUser() {

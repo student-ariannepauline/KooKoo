@@ -13,8 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/samplepfp"
+        android:background="@drawable/profile_picture"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -166,18 +165,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_address" />
 
-    <EditText
+    <TextView
         android:id="@+id/profile_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
+        android:drawableStart="@drawable/ic_outline_birthday"
         android:fontFamily="@font/metropolis_light"
         android:padding="5dp"
         android:text="$Birthday"
-        android:drawableStart="@drawable/ic_outline_birthday"
-        android:drawablePadding="5dp"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

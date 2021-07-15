@@ -42,10 +42,6 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
 
-        binding.loginbtnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
-        }
-
         binding.resetPasswordTxt.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_resetFragment)
         }

@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentProfileBinding
 import com.sunnyside.kookoo.hideKeyboard
@@ -45,11 +47,25 @@ class ViewProfileFragment : AppBarFragment() {
             val birthday =
                 LocalDateTime.ofInstant(profile.birthDate.toInstant(), ZoneId.systemDefault())
             binding.profileName.text = profile.firstName
-            binding.profileEmail.setText(profile.email)
+            binding.profileEmail.text = profile.email
             binding.profileYearLevel.text = profile.level.toString() + " year " + profile.program
-            binding.profileNumber.setText(profile.contactNumber)
-            binding.profileAddress.setText(profile.address)
-            binding.profileBirthday.setText(birthday.format(birthdayFormat))
+            binding.profileNumber.text = profile.contactNumber
+            binding.profileAddress.text = profile.address
+            binding.profileBirthday.text = birthday.format(birthdayFormat)
+
+            val picLink = profile.picLink
+
+            val storageRef = Firebase.storage.reference
+            val image = storageRef.child("/profilePicture/${picLink}")
+
+            image.downloadUrl
+                .addOnSuccessListener { url ->
+                    activity?.let {
+                        Glide.with(it).
+                        load(url)
+                            .into(binding.imgProfilePfp)
+                    }
+                }
         })
 
         setupViews()
