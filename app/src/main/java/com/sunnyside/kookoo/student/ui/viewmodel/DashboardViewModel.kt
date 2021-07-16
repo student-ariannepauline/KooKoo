@@ -5,12 +5,16 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import com.sunnyside.kookoo.student.model.JoinedClassModel
+import com.sunnyside.kookoo.student.model.MemberModel
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -25,31 +29,28 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                 if (!documents.isEmpty) {
                     val document = documents.first()
 
+                    val classData = mapOf(
+                        "class_id" to classId,
+                        "name" to document.data["name"],
+                        "is_admin" to is_admin
+                    )
+
                     db.collection("classes_joined")
                         .document(uid)
                         .get()
                         .addOnSuccessListener { snapshot ->
                             if (!snapshot.exists()) {
                                 val data = hashMapOf(
-                                    "classes" to arrayListOf(mapOf(
-                                        "class_id" to classId,
-                                        "name" to document.data["name"],
-                                        "is_admin" to is_admin
-                                    ))
+                                    "classes" to arrayListOf(classData)
                                 )
                                 db.collection("classes_joined").document(uid).set(data)
                             } else {
                                 db.collection("classes_joined").document(uid).update(
-                                    "classes", FieldValue.arrayUnion(
-                                        mapOf(
-                                            "class_id" to classId,
-                                            "name" to document.data["name"],
-                                            "is_admin" to is_admin
-                                        )
-                                    )
+                                    "classes", FieldValue.arrayUnion(classData)
                                 )
                             }
                             subscribeToClass(classId)
+                            beAMemberOfClass(classId, uid)
                         }
                 }
             }
@@ -62,12 +63,60 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
         db.collection("classes")
             .add(newClass)
             .addOnSuccessListener { documentReference ->
-                Log.d("tite", "DocumentSnapshot written with ID: ${documentReference.id}")
+                Log.d("View Model", "DocumentSnapshot written with ID: ${documentReference.id}")
                 joinClass(documentReference.id, uid, true)
             }
             .addOnFailureListener { e ->
-                Log.w("tite", "Error adding document", e)
+                Log.w("View Model", "Error adding document", e)
             }
+    }
+
+    private fun getProfile(uid: String) : Task<QuerySnapshot> {
+        val docRef = db.collection("user_profile").whereEqualTo("uid", uid)
+
+        return docRef.get()
+    }
+
+    private fun beAMemberOfClass(classId : String, uid: String) {
+        val profileQuery = getProfile(uid)
+        val name = Firebase.auth.currentUser?.displayName as String
+
+        profileQuery.addOnSuccessListener { profileDocuments ->
+
+            if (profileDocuments != null && !profileDocuments.isEmpty) {
+                val profile = profileDocuments.first()
+
+                val level = profile["level"] as Long
+                val program = profile["program"] as String
+                val picLink = profile["picLink"] as String
+
+                val newMember = MemberModel(
+                    uid,
+                    name,
+                    program,
+                    level,
+                    picLink
+                )
+
+                db.collection("members_in_class")
+                    .document(classId)
+                    .get()
+                    .addOnSuccessListener { snapshot ->
+                        if (!snapshot.exists()) {
+                            val data = hashMapOf(
+                                "members" to arrayListOf(newMember)
+                            )
+                            db.collection("members_in_class").document(classId).set(data)
+                        }
+                        else {
+                            db.collection("members_in_class").document(classId).update(
+                                "members", FieldValue.arrayUnion(newMember)
+                            )
+                        }
+                    }
+            }
+
+        }
     }
 
     fun getClasses(uid: String): ListenerRegistration {
@@ -75,7 +124,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
 
         return docRef.addSnapshotListener { documents, e ->
             if (e != null) {
-                Log.w("tite", "Listen failed.", e)
+                Log.w("View Model", "Listen failed.", e)
                 return@addSnapshotListener
             }
 
@@ -98,10 +147,10 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                 }
 
                 joinedClassesModel.value = joinedClassesResponseModel
-                Log.d("Tite", joinedClassesModel.value.toString())
+                Log.d("View Model", joinedClassesModel.value.toString())
 
             } else {
-                Log.d("tite", "Current data: null")
+                Log.d("View Model", "Current data: null")
             }
 
         }
@@ -114,7 +163,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                 if (!task.isSuccessful) {
                     msg = "Can't SUBSCRIBED"
                 }
-                Log.d("tite", msg)
+                Log.d("View Model", msg)
             }
     }
 
@@ -125,7 +174,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                 if (!task.isSuccessful) {
                     msg = "Can't UNSUBSCRIBED"
                 }
-                Log.d("tite", msg)
+                Log.d("View Model", msg)
             }
     }
 }

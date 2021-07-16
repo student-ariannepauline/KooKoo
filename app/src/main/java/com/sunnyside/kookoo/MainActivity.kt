@@ -42,10 +42,10 @@ class MainActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val token = task.result?.token.toString()
                     UserToken.addToken(token)
-                    Log.d("tite", token)
+                    Log.d("AUTH", token)
 
                 } else {
-                    Log.w("tite", "Error getting token", task.exception)
+                    Log.w("AUTH", "Error getting token", task.exception)
                 }
             }
 

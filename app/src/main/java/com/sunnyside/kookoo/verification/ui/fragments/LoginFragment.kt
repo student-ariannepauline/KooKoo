@@ -16,6 +16,7 @@ import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentLoginBinding
 import com.sunnyside.kookoo.databinding.FragmentProfileBinding
+import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.ui.StudentActivity
 import com.sunnyside.kookoo.testKolanglods.ui.PangTestingLangLodsActivity
 
@@ -49,6 +50,8 @@ class LoginFragment : Fragment() {
         binding.loginBtn.setOnClickListener {
             login()
         }
+
+        setAppBarTitle(" ")
 
 
         return view

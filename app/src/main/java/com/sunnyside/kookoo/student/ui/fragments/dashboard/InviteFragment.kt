@@ -48,7 +48,7 @@ class InviteFragment: Fragment() {
         setAppBarTitle("Invite using Code")
 
         val clipboard = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("tite", binding.textInviteCode.text)
+        val clip = ClipData.newPlainText("Dashboard", binding.textInviteCode.text)
 
         binding.btnCopy.setOnClickListener {
             clipboard.setPrimaryClip(clip)

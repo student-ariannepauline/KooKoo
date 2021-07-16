@@ -105,4 +105,9 @@
             android:name="profile"
             app:argType="com.sunnyside.kookoo.student.model.StudentProfileModel" />
     </fragment>
+    <fragment
+        android:id="@+id/membersFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.dashboard.MembersFragment"
+        android:label="fragment_members"
+        tools:layout="@layout/fragment_members" />
 </navigation>

@@ -7,5 +7,11 @@
         android:icon="@drawable/ic_baseline_invite_icon"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_members"
+        android:icon="@drawable/ic_baseline_info_members"
+        android:title="Invite"
+        app:showAsAction="ifRoom" />
+
 
 </menu>

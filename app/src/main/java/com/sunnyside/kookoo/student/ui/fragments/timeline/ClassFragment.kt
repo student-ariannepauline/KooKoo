@@ -1,6 +1,7 @@
 package com.sunnyside.kookoo.student.ui.fragments.timeline
 
 import android.app.ActionBar
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -33,6 +34,10 @@ class ClassFragment() : Fragment() {
     private lateinit var forecastFragment: ForecastFragment
     private lateinit var calendarFragment: CalendarFragment
 
+    private lateinit var currentFragment : Fragment
+    private lateinit var selectedFragmentString : String
+    private lateinit var fragmentMap : Map<String, Fragment>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,8 +45,20 @@ class ClassFragment() : Fragment() {
         forecastFragment = ForecastFragment()
         calendarFragment = CalendarFragment()
 
+        fragmentMap = mapOf(
+            "timeline" to timelineFragment,
+            "forecast" to forecastFragment,
+            "calendar" to calendarFragment
+        )
+
+        selectedFragmentString = "timeline"
+        currentFragment = fragmentMap[selectedFragmentString] as Fragment
+
+        makeCurrentFragment(currentFragment, selectedFragmentString)
+
         JoinedClass.enterClass(args.joinedClass)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,13 +68,11 @@ class ClassFragment() : Fragment() {
         _binding = ActivityClassBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        makeCurrentFragment(timelineFragment)
-
         binding.classBottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.homeFragment -> makeCurrentFragment(timelineFragment)
-                R.id.forecastFragment -> makeCurrentFragment(forecastFragment)
-                R.id.calendarFragment -> makeCurrentFragment(calendarFragment)
+                R.id.homeFragment -> makeCurrentFragment(timelineFragment, "timeline")
+                R.id.forecastFragment -> makeCurrentFragment(forecastFragment, "forecast")
+                R.id.calendarFragment -> makeCurrentFragment(calendarFragment, "calendar")
             }
             true
         }
@@ -72,11 +87,15 @@ class ClassFragment() : Fragment() {
         activity?.actionBar?.title = "Class"
     }
 
-    private fun makeCurrentFragment(fragment: Fragment) =
+
+    private fun makeCurrentFragment(fragment: Fragment, fragmentString : String) {
         parentFragmentManager.beginTransaction().apply {
             replace(R.id.fl_wrapper, fragment)
             commit()
         }
+
+        selectedFragmentString = fragmentString
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

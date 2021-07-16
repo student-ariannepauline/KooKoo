@@ -22,7 +22,7 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
         user!!.updateEmail(editedProfile.email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("tite", "User email address updated.")
+                    Log.d("View Model", "User email address updated.")
                 }
             }
 
@@ -46,10 +46,10 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
 
                     db.collection("user_profile").document(document.id).set(profileData)
                         .addOnSuccessListener {
-                            Log.d("tite", "Profile Updated")
+                            Log.d("View Model", "Profile Updated")
                         }
                         .addOnFailureListener {
-                            Log.d("tite", "Profile Not Saved")
+                            Log.d("View Model", "Profile Not Saved")
                         }
 
                 }

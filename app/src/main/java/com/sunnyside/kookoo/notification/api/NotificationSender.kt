@@ -17,14 +17,14 @@ object NotificationSender {
                     val message = response.body()
 
                     if (message != null) {
-                        Log.d("tite", "sent by ${message.message["sent by"]}")
+                        Log.d("My API", "sent by ${message.message["sent by"]}")
                     }
                 }
             } catch (e : SocketTimeoutException) {
-                Log.w("tite", "Can't connect to server.", e)
+                Log.w("My API", "Can't connect to server.", e)
             }
         }
-        Log.d("tite", title)
+        Log.d("My API", title)
     }
 
 }

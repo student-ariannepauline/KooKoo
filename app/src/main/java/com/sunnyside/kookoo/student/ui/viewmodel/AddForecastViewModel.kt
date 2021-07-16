@@ -31,7 +31,7 @@ class AddForecastViewModel(application: Application) : AndroidViewModel(applicat
         db.collection("forecasts")
             .add(newForecast)
             .addOnSuccessListener { documentReference ->
-                Log.d("tite", "Document with id: ${documentReference.id} successfully added")
+                Log.d("View Mode", "Document with id: ${documentReference.id} successfully added")
 
                 val event = mapOf(
                     "type" to "forecast",
@@ -67,7 +67,7 @@ class AddForecastViewModel(application: Application) : AndroidViewModel(applicat
 
             }
             .addOnFailureListener { e ->
-                Log.w("tite", "Error adding document", e)
+                Log.w("View Mode", "Error adding document", e)
             }
 
 

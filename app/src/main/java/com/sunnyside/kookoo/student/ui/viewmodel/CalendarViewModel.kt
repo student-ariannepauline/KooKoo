@@ -50,9 +50,9 @@ class CalendarViewModel(application: Application) : AndroidViewModel(application
                     }
 
                     events.value = eventsListResponse
-                    Log.d("tite", events.value.toString())
+                    Log.d("View Model", events.value.toString())
                 } else {
-                    Log.d("tite", "Current data: null")
+                    Log.d("View Model", "Current data: null")
                     events.value = emptyList()
                 }
             }

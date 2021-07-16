@@ -18,8 +18,9 @@ import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.ui.adapters.AnnouncementsListAdapter
 import com.sunnyside.kookoo.student.ui.viewmodel.TimelineViewModel
+import com.sunnyside.kookoo.utilities.ClassAppbarFragment
 
-class TimelineFragment : Fragment() {
+class TimelineFragment : ClassAppbarFragment() {
     private lateinit var mTimelineViewModel: TimelineViewModel
     private lateinit var classId: String
     private lateinit var registration: ListenerRegistration
@@ -37,21 +38,6 @@ class TimelineFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.invite_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_invite -> {
-            findNavController().navigate(R.id.inviteFragment)
-            true
-        }
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
     override fun onStart() {
         super.onStart()
         registration = mTimelineViewModel.getAnnouncements(classId)
@@ -59,7 +45,6 @@ class TimelineFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-
         registration.remove()
     }
 
@@ -81,8 +66,6 @@ class TimelineFragment : Fragment() {
         mTimelineViewModel.announcements.observe(viewLifecycleOwner, Observer { announcements ->
             adapter.setData(announcements)
         })
-
-        setAppBarTitle(JoinedClass.joinedClass.name)
 
 
         return view

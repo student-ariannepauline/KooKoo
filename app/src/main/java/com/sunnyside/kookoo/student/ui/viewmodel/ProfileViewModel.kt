@@ -20,7 +20,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
         return docRef.addSnapshotListener { documents, e ->
             if (e != null) {
-                Log.w("tite", "Listen failed.", e)
+                Log.w("View Model", "Listen failed.", e)
                 return@addSnapshotListener
             }
 

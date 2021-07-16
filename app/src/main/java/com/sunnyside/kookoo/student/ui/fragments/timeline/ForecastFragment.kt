@@ -15,8 +15,9 @@ import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.ui.adapters.ForecastListAdapter
 import com.sunnyside.kookoo.student.ui.viewmodel.ForecastViewModel
+import com.sunnyside.kookoo.utilities.ClassAppbarFragment
 
-class ForecastFragment : Fragment() {
+class ForecastFragment : ClassAppbarFragment() {
     private lateinit var mForecastViewModel: ForecastViewModel
     private lateinit var classId: String
     private lateinit var registration: ListenerRegistration
@@ -28,22 +29,7 @@ class ForecastFragment : Fragment() {
         super.onCreate(savedInstanceState)
         mForecastViewModel = ViewModelProvider(this).get(ForecastViewModel::class.java)
         classId = JoinedClass.joinedClass.class_id
-        setHasOptionsMenu(true)
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.invite_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_invite -> {
-            findNavController().navigate(R.id.inviteFragment)
-            true
-        }
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onStart() {
@@ -75,8 +61,6 @@ class ForecastFragment : Fragment() {
         mForecastViewModel.forecasts.observe(viewLifecycleOwner, Observer { forecasts ->
             adapter.setData(forecasts)
         })
-
-        setAppBarTitle(JoinedClass.joinedClass.name)
 
         return view
     }

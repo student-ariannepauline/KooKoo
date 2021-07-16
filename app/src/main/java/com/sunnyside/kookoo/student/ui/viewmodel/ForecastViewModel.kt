@@ -59,18 +59,18 @@ class ForecastViewModel(application: Application) : AndroidViewModel(application
                             db.collection("events").document(eventDocument.id)
                                 .update("events", events)
                                 .addOnSuccessListener {
-                                    Log.d("tite", "DocumentSnapshot successfully event!")
+                                    Log.d("View Model", "DocumentSnapshot successfully event!")
                                 }
                                 .addOnFailureListener {
-                                        e -> Log.w("tite", "Error deleting document", e)
+                                        e -> Log.w("View Model", "Error deleting document", e)
                                 }
 
                         }
                     }
 
                 docRef.delete()
-                    .addOnSuccessListener { Log.d("tite", "DocumentSnapshot successfully deleted!") }
-                    .addOnFailureListener { e -> Log.w("tite", "Error deleting document", e) }
+                    .addOnSuccessListener { Log.d("View Model", "DocumentSnapshot successfully deleted!") }
+                    .addOnFailureListener { e -> Log.w("View Model", "Error deleting document", e) }
             }
     }
 
@@ -81,7 +81,7 @@ class ForecastViewModel(application: Application) : AndroidViewModel(application
 
         return docRef.addSnapshotListener { documents, e ->
             if (e != null) {
-                Log.w("tite", "Listen failed", e)
+                Log.w("View Model", "Listen failed", e)
                 return@addSnapshotListener
             }
 

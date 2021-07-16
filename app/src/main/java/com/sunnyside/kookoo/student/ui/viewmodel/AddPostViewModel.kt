@@ -49,7 +49,7 @@ class AddPostViewModel(application: Application) : AndroidViewModel(application)
         db.collection("announcements")
             .add(newPost)
             .addOnSuccessListener { documentReference ->
-                Log.d("tite", "Document with id: ${documentReference.id} successfully added")
+                Log.d("View Model", "Document with id: ${documentReference.id} successfully added")
 
                 val event = mapOf(
                     "type" to "announcement",
@@ -83,7 +83,7 @@ class AddPostViewModel(application: Application) : AndroidViewModel(application)
                     }
             }
             .addOnFailureListener { e ->
-                Log.w("tite", "Error adding document", e)
+                Log.w("View Mode", "Error adding document", e)
             }
     }
 }

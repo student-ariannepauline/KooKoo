@@ -62,7 +62,7 @@ class AnnouncementsListAdapter(
                     }
 
             } catch (e: Exception) {
-                Log.d("tite", "walang ganyan lods")
+                Log.d("Adapter", "walang ganyan lods")
             }
 
         }
@@ -73,13 +73,13 @@ class AnnouncementsListAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AnnouncementsListAdapter.MyViewHolder {
+    ): MyViewHolder {
         val itemBinding =
             CardLayoutHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(itemBinding)
     }
 
-    override fun onBindViewHolder(holder: AnnouncementsListAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = announcementList[position]
         holder.bind(currentItem)
     }

@@ -18,20 +18,20 @@ import com.sunnyside.kookoo.R
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(p0: String) {
         super.onNewToken(p0)
-        Log.d("tite", "Refreshed token: $p0")
+        Log.d("Notification Service", "Refreshed token: $p0")
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
-        Log.d("tite", "From: ${remoteMessage.from}")
+        Log.d("Notification Service", "From: ${remoteMessage.from}")
 
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
             val messageData = remoteMessage.data as Map<*,*>
             val title = messageData["title"] as String
             val body = messageData["body"] as String
-            Log.d("tite", "Message data payload: ${remoteMessage.data}")
+            Log.d("Notification Service", "Message data payload: ${remoteMessage.data}")
 
             createNotificationChannel()
 
@@ -55,7 +55,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = getString(R.string.CHANNEL_ID)
-            val descriptionText = "TITE CHANNEL"
+            val descriptionText = "KooKoo Channel ID"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(getString(R.string.CHANNEL_ID), name, importance).apply {
                 description = descriptionText

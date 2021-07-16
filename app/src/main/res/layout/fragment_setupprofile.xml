@@ -7,20 +7,6 @@
     android:background="@color/dirtyWhite"
     tools:context=".student.ui.fragments.dashboard.SetupProfileFragment">
 
-    <TextView
-        android:id="@+id/textSetupYourProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/metropolis_semibold"
-        android:text="Setting up your Profile"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/setupPfp"
         android:layout_width="100dp"
@@ -30,7 +16,7 @@
         android:src="@drawable/ic_outline_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textSetupYourProfile"
+        app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/imgView_Circular"
         app:strokeColor="@color/dirtyWhite"
         app:strokeWidth="3dp" />

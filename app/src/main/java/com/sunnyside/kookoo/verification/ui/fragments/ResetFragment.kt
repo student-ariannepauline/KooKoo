@@ -13,6 +13,7 @@ import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentForgotpasswordBinding
 import com.sunnyside.kookoo.databinding.FragmentProfileBinding
 import com.sunnyside.kookoo.databinding.FragmentResetpasswordBinding
+import com.sunnyside.kookoo.setAppBarTitle
 
 class ResetFragment : Fragment() {
     private var _binding: FragmentForgotpasswordBinding? = null
@@ -28,10 +29,14 @@ class ResetFragment : Fragment() {
 
         setupViews()
 
+
+
         return view
     }
 
     private fun setupViews() {
+        setAppBarTitle(" ")
+
         binding.createAccountTxt.setOnClickListener {
             findNavController().navigate(R.id.action_forgotFragment_to_signupFragment)
         }
@@ -47,9 +52,9 @@ class ResetFragment : Fragment() {
         Firebase.auth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("tite", "Email sent.")
+                    Log.d("AUTH", "Email sent.")
                 } else {
-                    Log.d("tite", "Could not send email.")
+                    Log.d("AUTH", "Could not send email.")
                 }
             }
     }

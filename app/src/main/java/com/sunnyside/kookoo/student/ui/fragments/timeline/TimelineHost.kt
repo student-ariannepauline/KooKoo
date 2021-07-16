@@ -12,43 +12,18 @@ import com.sunnyside.kookoo.databinding.FragmentInviteCodeBinding
 import com.sunnyside.kookoo.setAppBarTitle
 import com.sunnyside.kookoo.student.data.JoinedClass
 import com.sunnyside.kookoo.student.model.JoinedClassModel
+import com.sunnyside.kookoo.utilities.ClassAppbarFragment
 
 
-class TimelineHost : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.invite_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_invite -> {
-            findNavController().navigate(R.id.inviteFragment)
-            true
-        }
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
-    }
+class TimelineHost : ClassAppbarFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        setAppBarTitle(JoinedClass.joinedClass.name)
-
         return inflater.inflate(R.layout.fragment_timeline_host, container, false)
-
-
-
     }
-
 
 
 }

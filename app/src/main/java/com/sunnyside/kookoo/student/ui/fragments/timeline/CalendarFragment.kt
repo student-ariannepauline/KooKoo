@@ -19,6 +19,7 @@ import com.sunnyside.kookoo.student.model.CalendarAnnouncementModel
 import com.sunnyside.kookoo.student.model.CalendarForecastModel
 import com.sunnyside.kookoo.student.ui.adapters.CalendarListAdapter
 import com.sunnyside.kookoo.student.ui.viewmodel.CalendarViewModel
+import com.sunnyside.kookoo.utilities.ClassAppbarFragment
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -26,7 +27,7 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
-class CalendarFragment : Fragment() {
+class CalendarFragment : ClassAppbarFragment() {
     private lateinit var dateId : String
     private lateinit var calendar : Calendar
     private lateinit var formatter : DateTimeFormatter
@@ -48,24 +49,7 @@ class CalendarFragment : Fragment() {
         formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
         setDate()
         getEvents()
-        setHasOptionsMenu(true)
 
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.invite_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_invite -> {
-            findNavController().navigate(R.id.inviteFragment)
-            true
-        }
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onCreateView(
@@ -92,15 +76,12 @@ class CalendarFragment : Fragment() {
             adapter.setData(events)
         })
 
-        setAppBarTitle(JoinedClass.joinedClass.name)
-
-
         return view
     }
 
     private fun getEvents() {
         mCalendarViewModel.getEvents(classId, dateId)
-        Log.d("tite", "classId : $classId, dateId: $dateId")
+        Log.d("Timeline", "classId : $classId, dateId: $dateId")
     }
 
     private fun setDate() {

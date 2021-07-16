@@ -1,7 +1,17 @@
 package com.sunnyside.kookoo.student.ui.fragments.dashboard
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,6 +29,7 @@ import com.sunnyside.kookoo.student.model.StudentProfileModel
 import com.sunnyside.kookoo.student.ui.pickers.DatePicker
 import com.sunnyside.kookoo.student.ui.viewmodel.EditProfileViewModel
 import com.sunnyside.kookoo.utilities.AppBarFragment
+import java.io.ByteArrayOutputStream
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -31,6 +42,8 @@ class EditProfileFragment : AppBarFragment() {
     private val binding get() = _binding!!
     private lateinit var userProfile: StudentProfileModel
     private val args: EditProfileFragmentArgs by navArgs()
+    private lateinit var image : Uri
+    private lateinit var picLink : String
 
     private lateinit var birthDate : Date
 
@@ -72,7 +85,7 @@ class EditProfileFragment : AppBarFragment() {
             binding.profileBirthday.setText(birthday.format(birthdayFormat))
             birthDate = profile.birthDate
 
-            val picLink = profile.picLink
+            picLink = profile.picLink
 
             val storageRef = Firebase.storage.reference
             val image = storageRef.child("/profilePicture/${picLink}")
@@ -92,6 +105,28 @@ class EditProfileFragment : AppBarFragment() {
             save()
         }
 
+        binding.imgProfilePfp.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if (activity?.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_DENIED){
+                    //permission denied
+                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
+                    //show popup to request runtime permission
+                    requestPermissions(permissions, PERMISSION_CODE);
+                }
+                else{
+                    //permission already granted
+                    pickImageFromGallery();
+                }
+            }
+            else{
+                //system OS is < Marshmallow
+                pickImageFromGallery();
+            }
+        }
+
+
+
         binding.profileBirthday.setOnClickListener {
             val pickerFragment = DatePicker() { selectedDate ->
                 birthDate = Date.from(selectedDate.atStartOfDay().atZone(ZoneId.systemDefault())
@@ -108,6 +143,30 @@ class EditProfileFragment : AppBarFragment() {
     }
 
     private fun save() {
+
+        try {
+            val bitmap = (binding.imgProfilePfp.drawable as BitmapDrawable).bitmap
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+            val data = baos.toByteArray()
+
+            val storageRef = Firebase.storage.reference
+            val profilePictureRef = storageRef.child("profilePicture/${image.lastPathSegment}")
+
+            val uploadTask = profilePictureRef.putBytes(data)
+
+            uploadTask.addOnFailureListener {
+                Log.d("Set up Profile", "Can't Upload Image")
+            }.addOnSuccessListener { taskSnapshot ->
+
+            }
+
+            picLink = image.lastPathSegment.toString() + ".png"
+        }
+        catch (e:Exception) {
+
+        }
+
         val editedProfile = StudentProfileModel(
             userProfile.uid,
             userProfile.firstName,
@@ -118,11 +177,52 @@ class EditProfileFragment : AppBarFragment() {
             birthDate,
             userProfile.program,
             userProfile.level,
-            userProfile.picLink
+            picLink
         )
 
         mEditProfileViewModel.saveProfile(editedProfile)
 
+
+
         findNavController().popBackStack()
+    }
+
+    private fun pickImageFromGallery() {
+        //Intent to pick image
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    companion object {
+        //image pick code
+        private val IMAGE_PICK_CODE = 1000;
+        //Permission code
+        private val PERMISSION_CODE = 1001;
+    }
+
+    //handle requested permission result
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if (grantResults.size >0 && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED){
+                    //permission from popup granted
+                    pickImageFromGallery()
+                }
+                else{
+                    //permission from popup denied
+                    Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    //handle result of picked image
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            image = data?.data!!
+            binding.imgProfilePfp.setImageURI(image)
+        }
     }
 }

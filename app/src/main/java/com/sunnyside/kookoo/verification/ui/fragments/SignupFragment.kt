@@ -15,6 +15,7 @@ import com.google.firebase.ktx.Firebase
 import com.sunnyside.kookoo.R
 import com.sunnyside.kookoo.databinding.FragmentProfileBinding
 import com.sunnyside.kookoo.databinding.FragmentSignupBinding
+import com.sunnyside.kookoo.setAppBarTitle
 
 class SignupFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
@@ -39,6 +40,8 @@ class SignupFragment : Fragment() {
         binding.textBtnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
         }
+
+        setAppBarTitle(" ")
 
         return view
     }
