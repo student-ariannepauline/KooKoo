@@ -36,7 +36,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             createNotificationChannel()
 
             val builder = NotificationCompat.Builder(this, getString(R.string.CHANNEL_ID))
-                .setSmallIcon(R.drawable.applogo)
+                .setSmallIcon(R.drawable.notiflogo)
+                .setColor(getColor(R.color.colorPrimary))
+                .setColorized(true)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

@@ -37,7 +37,9 @@ class CalendarListAdapter : RecyclerView.Adapter<CalendarListAdapter.BaseViewHol
             itemBinding.itemCalendarForecastStatus.text = item.status
 
             if (item.status == "CANCELLED") {
-                itemBinding.itemCalendarForecastStatus.setTextColor(Color.parseColor("#FF0000"))
+                itemBinding.itemCalendarForecastStatus.setTextColor(Color.RED)
+            } else if (item.status == "PENDING") {
+                itemBinding.itemCalendarForecastStatus.setTextColor(Color.GRAY)
             }
         }
     }

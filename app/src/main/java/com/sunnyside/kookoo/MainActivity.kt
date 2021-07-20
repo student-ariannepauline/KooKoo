@@ -9,7 +9,11 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -18,6 +22,8 @@ import com.google.firebase.messaging.ktx.messaging
 import com.sunnyside.kookoo.student.data.UserToken
 import com.sunnyside.kookoo.student.ui.StudentActivity
 import com.sunnyside.kookoo.verification.ui.activity.VerificationActivity
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -25,9 +31,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        auth = Firebase.auth
 
-        checkForLoggedInUser()
+        val context = this
+
+        lifecycleScope.launch {
+            FirebaseApp.initializeApp(/*context=*/ context)
+            val firebaseAppCheck = FirebaseAppCheck.getInstance()
+            firebaseAppCheck.installAppCheckProviderFactory(
+                SafetyNetAppCheckProviderFactory.getInstance())
+
+
+            delay(1000L)
+
+            auth = Firebase.auth
+
+            checkForLoggedInUser()
+        }
+
+
+
+
 
 
     }

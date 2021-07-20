@@ -57,7 +57,10 @@ class TimelineAdminFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentTimelineAdminBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = AnnouncementsListAdapter(mTimelineViewModel, storage)
+        val adapter = AnnouncementsListAdapter(mTimelineViewModel) { post ->
+            val action = TimelineAdminFragmentDirections.actionTimelineAdminFragment2ToEditPostFragment(post)
+            findNavController().navigate(action)
+        }
         val recyclerView = binding.timelineTestList
 
         recyclerView.adapter = adapter

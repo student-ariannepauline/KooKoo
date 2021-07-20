@@ -2,6 +2,8 @@ package com.sunnyside.kookoo.student.ui.fragments.admin
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -104,6 +106,20 @@ class AddForecastFragment : Fragment() {
             timePickerFragment.show(childFragmentManager, "timePicker")
         }
 
+        val spinner : Spinner = binding.btnStatusPicker
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.status_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
+
         hideKeyboard(binding.edittextTitleForecast)
         hideKeyboard(binding.edittextOtherContentForecast)
 
@@ -118,7 +134,7 @@ class AddForecastFragment : Fragment() {
         }
 
         link = binding.edittextOtherContentForecast.text.toString()
-
+        val status = binding.btnStatusPicker.selectedItem.toString()
 
         try {
             meetingDateTime = LocalDateTime.of(meetingDate, meetingTime)
@@ -135,7 +151,7 @@ class AddForecastFragment : Fragment() {
                 "sksksks",
                 title,
                 link,
-                "CONFIRMED",
+                status,
                 meetingDateTime
             )
 

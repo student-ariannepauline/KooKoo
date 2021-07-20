@@ -1,6 +1,7 @@
 package com.sunnyside.kookoo.student.ui.fragments.admin
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -54,8 +55,9 @@ class ForecastAdminFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentForecastAdminBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = ForecastListAdapter(mForecastViewModel) {
-
+        val adapter = ForecastListAdapter(mForecastViewModel) { forecast ->
+            val action = ForecastAdminFragmentDirections.actionForecastAdminFragment2ToEditForecastFragment(forecast)
+            findNavController().navigate(action)
         }
 
         val recyclerView = binding.recyclerViewForecast

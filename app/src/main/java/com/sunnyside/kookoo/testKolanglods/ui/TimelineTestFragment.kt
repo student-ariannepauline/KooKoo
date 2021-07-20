@@ -60,7 +60,9 @@ class TimelineTestFragment : Fragment() {
     ): View? {
         _binding = FragmentTimelineTestBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = AnnouncementsListAdapter(mTimelineViewModel, storage)
+        val adapter = AnnouncementsListAdapter(mTimelineViewModel) {
+
+        }
         val recyclerView = binding.timelineTestList
 
         recyclerView.adapter = adapter

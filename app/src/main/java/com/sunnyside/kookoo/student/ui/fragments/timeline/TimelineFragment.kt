@@ -56,7 +56,9 @@ class TimelineFragment : ClassAppbarFragment() {
         // Inflate the layout for this fragment
         _binding = FragmentTimelineBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = AnnouncementsListAdapter(mTimelineViewModel, storage)
+        val adapter = AnnouncementsListAdapter(mTimelineViewModel) {
+
+        }
         val recyclerView = binding.timelineRecyclerView
 
         recyclerView.adapter = adapter

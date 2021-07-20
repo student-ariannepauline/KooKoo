@@ -18,5 +18,17 @@
         <action
             android:id="@+id/action_forecastAdminFragment2_to_addForecastFragment"
             app:destination="@id/addForecastFragment" />
+        <action
+            android:id="@+id/action_forecastAdminFragment2_to_editForecastFragment"
+            app:destination="@id/editForecastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editForecastFragment"
+        android:name="com.sunnyside.kookoo.student.ui.fragments.admin.EditForecastFragment"
+        android:label="fragment_edit_forecast"
+        tools:layout="@layout/fragment_edit_forecast" >
+        <argument
+            android:name="forecast"
+            app:argType="com.sunnyside.kookoo.student.model.ForecastModel" />
     </fragment>
 </navigation>

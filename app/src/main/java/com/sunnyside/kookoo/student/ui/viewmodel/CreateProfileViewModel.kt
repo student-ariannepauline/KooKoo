@@ -46,8 +46,6 @@ class CreateProfileViewModel(application: Application) : AndroidViewModel(applic
                 }
             }
 
-
-
     }
 
     private fun beAMemberOfClass(newProfile : StudentProfileModel, classId : String) {

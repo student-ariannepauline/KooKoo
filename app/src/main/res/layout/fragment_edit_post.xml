@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".student.ui.fragments.admin.EditPostFragment">
+    tools:context=".student.ui.fragments.admin.EditPostFragment"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -11,4 +15,136 @@
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/samplepfp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/imgView_Circular"
+                app:strokeColor="@color/dirtyWhite"
+                app:strokeWidth="3dp" />
+
+            <TextView
+                android:id="@+id/textName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/metropolis_semibold"
+                android:text="Mr. President"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/imgProfile"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textClassroom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/metropolis_light"
+                android:text="Classroom 101"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/imgProfile"
+                app:layout_constraintTop_toBottomOf="@id/textName" />
+
+
+            <EditText
+                android:id="@+id/edittextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/textinput_rectangle"
+                android:fontFamily="@font/metropolis_bold"
+                android:hint="Your Title Here"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgProfile" />
+
+            <EditText
+                android:id="@+id/edittextBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/textinput_rectangle"
+                android:fontFamily="@font/metropolis_regular"
+                android:hint="Your body here"
+                android:inputType="textMultiLine"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="100dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edittextTitle" />
+
+            <EditText
+                android:id="@+id/edittextOtherContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/textinput_rectangle"
+                android:fontFamily="@font/metropolis_regular"
+                android:hint="Your Link Here"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edittextBody" />
+
+            <Button
+                android:id="@+id/btnDatePicker"
+                style="?android:spinnerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/metropolis_regular"
+                android:text="Set Deadline"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.999"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edittextOtherContent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

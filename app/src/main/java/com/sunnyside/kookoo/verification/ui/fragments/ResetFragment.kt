@@ -45,6 +45,7 @@ class ResetFragment : Fragment() {
             val email = binding.forgotPasswordTxt.text.toString()
 
             sendResetEmail(email)
+
         }
     }
 
@@ -53,8 +54,10 @@ class ResetFragment : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d("AUTH", "Email sent.")
+                    findNavController().popBackStack()
                 } else {
                     Log.d("AUTH", "Could not send email.")
+                    findNavController().popBackStack()
                 }
             }
     }

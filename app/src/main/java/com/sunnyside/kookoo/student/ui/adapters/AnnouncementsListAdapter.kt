@@ -20,6 +20,7 @@ import com.sunnyside.kookoo.databinding.CardLayoutForecastBinding
 import com.sunnyside.kookoo.databinding.CardLayoutHomeBinding
 import com.sunnyside.kookoo.databinding.CardLayoutJoinedClassTestBinding
 import com.sunnyside.kookoo.student.model.AnnouncementModel
+import com.sunnyside.kookoo.student.model.ForecastModel
 import com.sunnyside.kookoo.student.ui.viewmodel.TimelineViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,12 +30,12 @@ import java.time.format.DateTimeFormatter
 
 class AnnouncementsListAdapter(
     val timelineViewModel: TimelineViewModel,
-    val storage: FirebaseStorage
+    private val listener: (AnnouncementModel) -> Unit
 ) : RecyclerView.Adapter<AnnouncementsListAdapter.MyViewHolder>() {
     private var announcementList = ArrayList<AnnouncementModel>()
 
 
-    class MyViewHolder(val itemBinding: CardLayoutHomeBinding) :
+    inner class MyViewHolder(val itemBinding: CardLayoutHomeBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bind(announcement: AnnouncementModel) {
@@ -53,7 +54,8 @@ class AnnouncementsListAdapter(
 
 
             try {
-                val image = Firebase.storage.reference.child("/profilePicture/${announcement.pic_link}")
+                val image =
+                    Firebase.storage.reference.child("/profilePicture/${announcement.pic_link}")
 
                 image.downloadUrl
                     .addOnSuccessListener { url ->
@@ -63,6 +65,10 @@ class AnnouncementsListAdapter(
 
             } catch (e: Exception) {
                 Log.d("Adapter", "walang ganyan lods")
+            }
+
+            itemBinding.root.setOnClickListener {
+                listener.invoke(announcement)
             }
 
         }
