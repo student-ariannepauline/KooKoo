@@ -10,3 +10,16 @@ For demo go here:  https://drive.google.com/file/d/18h95kxJiqHwPznEMZBar3LEQB7nL
 ## Contributors
 - Morris John Montemayor <morrisjohnmontemayor@gmail.com>
 - Arianne Pauline Ignacio <ariannepaulineignacio@gmail.com>
+
+---
+## Built With
+- Android Studio
+
+## Installation
+- 1. Get a free APK file at: https://drive.google.com/file/d/16ddT4rw9Rv6dpyIIX0Avk1G3lZLgDtvo/view?usp=sharing
+- 2. Clone the repository
+
+---
+## Status
+- Production has come to a halt after finishing the school requirement.
+
